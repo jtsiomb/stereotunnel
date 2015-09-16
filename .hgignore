@@ -1,0 +1,7 @@
+\.o$
+\.swp$
+\.d$
+\.xcuserstate$
+\.xcworkspace
+xcuserdata/
+^build/
