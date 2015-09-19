@@ -1,5 +1,7 @@
-#import "viewctl.h"
+#include <stdlib.h>
 #import <OpenGLES/ES2/glext.h>
+#import "viewctl.h"
+#include "istereo.h"
 
 @interface ViewController () {
 	EAGLContext *ctx;
@@ -10,6 +12,8 @@
 
 
 - (void)create_ad;
+- (void)show_ad;
+- (void)hide_ad;
 
 - (void)init_gl;
 - (void)destroy_gl;
@@ -31,7 +35,6 @@
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
 
 	[self create_ad];
-
 
 	[self init_gl];
 }
@@ -70,35 +73,15 @@
 
 - (void)create_ad
 {
-	ad_visible = NO;
 	ad = [[ADBannerView alloc] initWithAdType: ADAdTypeBanner];
 	[ad setAutoresizingMask: UIViewAutoresizingFlexibleWidth];
-	ad.frame = CGRectOffset(ad.frame, 0, -ad.frame.size.height);
+	ad_visible = YES;
+	[self hide_ad];
 	[self.view addSubview: ad];
 	ad.delegate = self;
 }
 
-- (void)init_gl
-{
-    [EAGLContext setCurrentContext: self->ctx];
-
-	glClearColor(1.0, 0.0, 0.0, 1.0);
-}
-
-- (void)destroy_gl
-{
-    [EAGLContext setCurrentContext: self->ctx];
-}
-
-
-- (void)glkView: (GLKView*)view drawInRect: (CGRect)rect
-{
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-}
-
-// ADBannerDelegate functions
-
-- (void)bannerViewDidLoadAd: (ADBannerView*)banner
+- (void)show_ad
 {
 	if(!ad_visible) {
 		CGRect rect = ad.frame;
@@ -108,12 +91,52 @@
 	}
 }
 
-- (void)bannerView: (ADBannerView*)banner didFailToReceiveAdWithError: (NSError*)error
+- (void)hide_ad
 {
 	if(ad_visible) {
-		ad_visible = NO;
 		ad.frame = CGRectOffset(ad.frame, 0, -ad.frame.size.height);
+		ad_visible = NO;
 	}
+}
+
+- (void)init_gl
+{
+    [EAGLContext setCurrentContext: self->ctx];
+
+	if(init() == -1) {
+		NSLog(@"app initialization failed");
+		exit(0);
+	}
+}
+
+- (void)destroy_gl
+{
+	cleanup();
+    [EAGLContext setCurrentContext: self->ctx];
+}
+
+
+- (void)glkView: (GLKView*)view drawInRect: (CGRect)rect
+{
+	redraw();
+}
+
+- (void)viewDidLayoutSubviews
+{
+	CGRect rect = self.view.frame;
+	reshape(rect.size.width, rect.size.height);
+}
+
+// ADBannerDelegate functions
+
+- (void)bannerViewDidLoadAd: (ADBannerView*)banner
+{
+	[self show_ad];
+}
+
+- (void)bannerView: (ADBannerView*)banner didFailToReceiveAdWithError: (NSError*)error
+{
+	[self hide_ad];
 
 	NSLog(@"Failed to retrieve ad");
 }
