@@ -5,6 +5,7 @@
 
 @interface ViewController () {
 	EAGLContext *ctx;
+	float pixel_scale;
 
 	ADBannerView *ad;
 	BOOL ad_visible;
@@ -25,6 +26,7 @@
 {
     [super viewDidLoad];
 
+
     self->ctx = [[EAGLContext alloc] initWithAPI: kEAGLRenderingAPIOpenGLES2];
     if(!self->ctx) {
         NSLog(@"Failed to create OpenGL ES 2.0 context");
@@ -33,6 +35,14 @@
     GLKView *view = (GLKView*)self.view;
     view.context = self->ctx;
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
+
+	if([view respondsToSelector: NSSelectorFromString(@"contentScaleFactor")]) {
+		pixel_scale = [[UIScreen mainScreen] scale];
+		view.contentScaleFactor = pixel_scale;
+		printf("pixel scale: %g\n", pixel_scale);
+	} else {
+		pixel_scale = 1.0f;
+	}
 
 	[self create_ad];
 
@@ -124,7 +134,10 @@
 - (void)viewDidLayoutSubviews
 {
 	CGRect rect = self.view.frame;
-	reshape(rect.size.width, rect.size.height);
+	int xsz = rect.size.width * pixel_scale;
+	int ysz = rect.size.height * pixel_scale;
+	reshape(xsz, ysz);
+	printf("viewport %dx%d (scale: %g)\n", xsz, ysz, pixel_scale);
 }
 
 // ADBannerDelegate functions

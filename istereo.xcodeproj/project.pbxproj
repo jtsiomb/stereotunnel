@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0669D6751BA858BF00611CFA /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0669D6741BA858BF00611CFA /* Info.plist */; };
 		0669D67F1BA85DDE00611CFA /* app_delegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0669D67B1BA85DDE00611CFA /* app_delegate.m */; };
 		0669D6801BA85DDE00611CFA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0669D67C1BA85DDE00611CFA /* main.m */; };
 		0669D6811BA85DDE00611CFA /* viewctl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0669D67E1BA85DDE00611CFA /* viewctl.m */; };
@@ -115,6 +114,7 @@
 		0669D78E1BAD02DC00611CFA /* stonewall.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0669D78A1BAD02DC00611CFA /* stonewall.jpg */; };
 		0669D78F1BAD02DC00611CFA /* text.png in Resources */ = {isa = PBXBuildFile; fileRef = 0669D78B1BAD02DC00611CFA /* text.png */; };
 		0669D7901BAD02DC00611CFA /* tiles.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0669D78C1BAD02DC00611CFA /* tiles.jpg */; };
+		06ED084A1BAF9A2E00C1211D /* icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06ED08491BAF9A2E00C1211D /* icons.xcassets */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -279,6 +279,7 @@
 		0669D78A1BAD02DC00611CFA /* stonewall.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = stonewall.jpg; path = data/stonewall.jpg; sourceTree = "<group>"; };
 		0669D78B1BAD02DC00611CFA /* text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = text.png; path = data/text.png; sourceTree = "<group>"; };
 		0669D78C1BAD02DC00611CFA /* tiles.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = tiles.jpg; path = data/tiles.jpg; sourceTree = "<group>"; };
+		06ED08491BAF9A2E00C1211D /* icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = icons.xcassets; path = ios/icons.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -295,6 +296,7 @@
 		0669D63E1BA851BE00611CFA = {
 			isa = PBXGroup;
 			children = (
+				06ED08491BAF9A2E00C1211D /* icons.xcassets */,
 				0669D7881BAD02B000611CFA /* data */,
 				0669D77B1BAD028300611CFA /* sdr */,
 				0669D6971BAD01C200611CFA /* libs */,
@@ -606,11 +608,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				0669D7861BAD02A200611CFA /* tunnel.p.glsl in Resources */,
-				0669D6751BA858BF00611CFA /* Info.plist in Resources */,
 				0669D7821BAD02A200611CFA /* test.p.glsl in Resources */,
 				0669D78D1BAD02DC00611CFA /* stonewall_normal.jpg in Resources */,
 				0669D78E1BAD02DC00611CFA /* stonewall.jpg in Resources */,
 				0669D7841BAD02A200611CFA /* text.p.glsl in Resources */,
+				06ED084A1BAF9A2E00C1211D /* icons.xcassets in Resources */,
 				0669D7901BAD02DC00611CFA /* tiles.jpg in Resources */,
 				0669D7871BAD02A200611CFA /* tunnel.v.glsl in Resources */,
 				0669D78F1BAD02DC00611CFA /* text.png in Resources */,
@@ -816,6 +818,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "$(SRCROOT)/ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
@@ -829,6 +832,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "$(SRCROOT)/ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;

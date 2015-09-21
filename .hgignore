@@ -3,5 +3,8 @@
 \.d$
 \.xcuserstate$
 \.xcworkspace
+\.xcassets
 xcuserdata/
 ^build/
+\.png$
+^data/

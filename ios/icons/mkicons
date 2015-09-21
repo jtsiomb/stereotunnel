@@ -1,0 +1,95 @@
+#!/bin/sh
+
+srcicon=icon.png
+srclaunch=launch.png
+
+while [ $# -gt 0 ]; do
+	case $1 in
+	-icon)
+		shift
+		srcicon=$1
+		;;
+	-launch)
+		shift
+		srclaunch=$1
+		;;
+	*)
+		echo "unexpected argument: $1"
+		exit 1
+		;;
+	esac
+	shift
+done
+
+if [ ! -f "$srcicon" ]; then
+	echo "source icon ($srcicon) missing" >&2
+	exit 1
+fi
+if [ ! -f "$srclaunch" ]; then
+	echo "source launch screen ($srclaunch) missing" >&2
+	exit 1
+fi
+
+mkicon()
+{
+	out=$1
+	sz=$2
+
+	echo "$srcicon -> $out (${sz}x${sz})"
+	convert $srcicon -resize $sz $out
+}
+
+mklaunch()
+{
+	out=$1
+	xsz=$2
+	ysz=$3
+
+	echo "$srclaunch -> $out (${xsz}x${ysz})"
+	convert $srclaunch -resize ${xsz}x${ysz}^ \
+		-gravity Center -crop ${xsz}x${ysz}+0+0 +repage \
+		$out
+}
+
+echo "Generating icons ..."
+# --- iphone spotlight icons
+mkicon icon29.png 29	# Icon-Small
+mkicon icon58.png 58	# Icon-Small@2x
+mkicon icon87.png 87	# Icon-Small@3x
+mkicon icon40.png 40	# Icon-Small-40
+mkicon icon80.png 80	# Icon-Small-40@2x
+mkicon icon120.png 120	# Icon-Small-40@3x
+
+# --- iphone app icons
+mkicon icon57.png 57	# Icon
+mkicon icon114.png 114	# Icon@2x
+mkicon icon120.png 120	# Icon-60@2x
+mkicon icon180.png 180	# Icon-60@3x
+
+# --- ipad spotlight (40 series plus the following)
+mkicon icon50.png 50	# Icon-Small-50
+mkicon icon100.png 100	# Icon-Small-50@2x
+
+# --- ipad app icons
+mkicon icon72.png 72	# Icon-72
+mkicon icon144.png 144	# Icon-72@2x
+mkicon icon76.png 76	# Icon-76
+mkicon icon152.png 152	# Icon-76@2x
+
+echo "Generating launch screens ..."
+# iphone portrait launch screen images
+mklaunch launch-1242x2208.png 1242 2208
+mklaunch launch-750x1334.png 750 1334
+mklaunch launch-640x960.png 640 960
+mklaunch launch-640x1136.png 640 1136
+mklaunch launch-320x480.png 320 480
+mklaunch launch-640x960.png 640 960
+mklaunch launch-640x1136.png 640 1136
+
+
+# ipad portrait launch screen images
+mklaunch launch-768x1024.png 768 1024
+mklaunch launch-1536x2048.png 1536 2048
+mklaunch launch-768x1004.png 768 1004
+mklaunch launch-1536x2008.png 1536 2008
+
