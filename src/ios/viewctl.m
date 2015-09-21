@@ -81,6 +81,17 @@
     return YES;
 }
 
+- (BOOL)shouldAutorotate
+{
+	return YES;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+	return UIInterfaceOrientationMaskLandscape;
+	//return UIInterfaceOrientationMaskAll;
+}
+
 - (void)create_ad
 {
 	ad = [[ADBannerView alloc] initWithAdType: ADAdTypeBanner];

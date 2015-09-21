@@ -118,16 +118,16 @@ void redraw(void)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	if(stereo) {
-		int split_pt = (int)((float)view_ysz * split);
+		int split_pt = (int)((float)view_xsz * split);
 
 		/* right eye */
-		glViewport(0, 0, view_xsz, split_pt);
-		cam_aspect((float)split_pt / (float)view_xsz);
+		glViewport(0, 0, split_pt, view_ysz);
+		cam_aspect((float)split_pt / (float)view_ysz);
 
 		gl_matrix_mode(GL_PROJECTION);
 		gl_load_identity();
 		cam_stereo_proj_matrix(CAM_RIGHT);
-		gl_rotatef(-90, 0, 0, 1);
+		//gl_rotatef(-90, 0, 0, 1);
 
 		gl_matrix_mode(GL_MODELVIEW);
 		gl_load_identity();
@@ -137,13 +137,13 @@ void redraw(void)
 		render(tsec);
 
 		/* left eye */
-		glViewport(0, split_pt, view_xsz, view_ysz - split_pt);
-		cam_aspect((float)(view_ysz - split_pt) / (float)view_xsz);
+		glViewport(split_pt, 0, view_xsz - split_pt, view_ysz);
+		cam_aspect((float)(view_xsz - split_pt) / (float)view_ysz);
 
 		gl_matrix_mode(GL_PROJECTION);
 		gl_load_identity();
 		cam_stereo_proj_matrix(CAM_LEFT);
-		gl_rotatef(-90, 0, 0, 1);
+		//gl_rotatef(-90, 0, 0, 1);
 
 		gl_matrix_mode(GL_MODELVIEW);
 		gl_load_identity();
@@ -157,7 +157,7 @@ void redraw(void)
 
 		gl_matrix_mode(GL_PROJECTION);
 		gl_load_identity();
-		gl_rotatef(-90, 0, 0, 1);
+		//gl_rotatef(-90, 0, 0, 1);
 		cam_proj_matrix();
 
 		gl_matrix_mode(GL_MODELVIEW);
@@ -280,7 +280,7 @@ static void tunnel_vertex(float u, float v, float du, float dv, int tang_loc, fl
 	dfdv = v3_sub(pos_dv, pos);
 	norm = v3_cross(dfdv, dfdu);
 
-	gl_vertex_attrib3f(tang_loc, dfdu.x, dfdu.y, dfdu.z);
+	gl_vertex_attrib3f(tang_loc, dfdu.x, -dfdu.y, dfdu.z);
 	gl_normal3f(norm.x, norm.y, norm.z);
 	gl_texcoord2f(u * 2.0, v * 4.0);
 	gl_vertex3f(pos.x, pos.y, pos.z);
@@ -348,9 +348,15 @@ void reshape(int x, int y)
 {
 	glViewport(0, 0, x, y);
 
+	float aspect = (float)x / (float)y;
+	float maxfov = 40.0;
+	float vfov = aspect > 1.0 ? maxfov / aspect : maxfov;
+
+	cam_fov(vfov);
+
 	gl_matrix_mode(GL_PROJECTION);
 	gl_load_identity();
-	glu_perspective(40.0, (float)x / (float)y, 0.5, 500.0);
+	glu_perspective(vfov, aspect, 0.5, 500.0);
 
 	view_xsz = x;
 	view_ysz = y;
