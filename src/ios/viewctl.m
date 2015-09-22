@@ -7,6 +7,7 @@
 	EAGLContext *ctx;
 	float pixel_scale;
 
+	GLKView *glview;
 	ADBannerView *ad;
 	BOOL ad_visible;
 }
@@ -32,13 +33,13 @@
         NSLog(@"Failed to create OpenGL ES 2.0 context");
     }
 
-    GLKView *view = (GLKView*)self.view;
-    view.context = self->ctx;
-    view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
+    glview = (GLKView*)self.view;
+    glview.context = self->ctx;
+    glview.drawableDepthFormat = GLKViewDrawableDepthFormat24;
 
-	if([view respondsToSelector: NSSelectorFromString(@"contentScaleFactor")]) {
+	if([glview respondsToSelector: NSSelectorFromString(@"contentScaleFactor")]) {
 		pixel_scale = [[UIScreen mainScreen] scale];
-		view.contentScaleFactor = pixel_scale;
+		glview.contentScaleFactor = pixel_scale;
 		printf("pixel scale: %g\n", pixel_scale);
 	} else {
 		pixel_scale = 1.0f;
@@ -98,7 +99,7 @@
 	[ad setAutoresizingMask: UIViewAutoresizingFlexibleWidth];
 	ad_visible = YES;
 	[self hide_ad];
-	[self.view addSubview: ad];
+	[glview addSubview: ad];
 	ad.delegate = self;
 }
 
