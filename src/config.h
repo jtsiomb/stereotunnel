@@ -1,10 +1,13 @@
 #ifndef CONFIG_H_
 #define CONFIG_H_
 
-#if defined(__IPHONE_3_0) || defined(__IPHONE_3_2) || defined(__IPHONE_4_0)
-#define IPHONE
+#ifdef __APPLE__
+#include <TargetConditionals.h>
 
-#define glClearDepth	glClearDepthf
+#if defined(TARGET_IPHONE_SIMULATOR) || defined(TARGET_OS_IPHONE)
+#define IPHONE
 #endif
+
+#endif	/* __APPLE__ */
 
 #endif	/* CONFIG_H_ */

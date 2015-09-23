@@ -7,6 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		060ECAD41BB1A9CC00CE9B80 /* boolanm.cc in Sources */ = {isa = PBXBuildFile; fileRef = 060ECAC91BB1A9CC00CE9B80 /* boolanm.cc */; settings = {ASSET_TAGS = (); }; };
+		060ECAD51BB1A9CC00CE9B80 /* button.cc in Sources */ = {isa = PBXBuildFile; fileRef = 060ECACB1BB1A9CC00CE9B80 /* button.cc */; settings = {ASSET_TAGS = (); }; };
+		060ECAD71BB1A9CC00CE9B80 /* event.cc in Sources */ = {isa = PBXBuildFile; fileRef = 060ECACD1BB1A9CC00CE9B80 /* event.cc */; settings = {ASSET_TAGS = (); }; };
+		060ECAD91BB1A9CC00CE9B80 /* screen.cc in Sources */ = {isa = PBXBuildFile; fileRef = 060ECACF1BB1A9CC00CE9B80 /* screen.cc */; settings = {ASSET_TAGS = (); }; };
+		060ECADA1BB1A9CC00CE9B80 /* slider.cc in Sources */ = {isa = PBXBuildFile; fileRef = 060ECAD01BB1A9CC00CE9B80 /* slider.cc */; settings = {ASSET_TAGS = (); }; };
+		060ECADB1BB1A9CC00CE9B80 /* textbox.cc in Sources */ = {isa = PBXBuildFile; fileRef = 060ECAD11BB1A9CC00CE9B80 /* textbox.cc */; settings = {ASSET_TAGS = (); }; };
+		060ECADC1BB1A9CC00CE9B80 /* theme.cc in Sources */ = {isa = PBXBuildFile; fileRef = 060ECAD21BB1A9CC00CE9B80 /* theme.cc */; settings = {ASSET_TAGS = (); }; };
+		060ECADD1BB1A9CC00CE9B80 /* widget.cc in Sources */ = {isa = PBXBuildFile; fileRef = 060ECAD31BB1A9CC00CE9B80 /* widget.cc */; settings = {ASSET_TAGS = (); }; };
+		060ECAEB1BB1AA5200CE9B80 /* checkbox.cc in Sources */ = {isa = PBXBuildFile; fileRef = 060ECADF1BB1AA5200CE9B80 /* checkbox.cc */; settings = {ASSET_TAGS = (); }; };
+		060ECAEC1BB1AA5200CE9B80 /* label.cc in Sources */ = {isa = PBXBuildFile; fileRef = 060ECAE31BB1AA5200CE9B80 /* label.cc */; settings = {ASSET_TAGS = (); }; };
+		060ECAEF1BB22A4400CE9B80 /* ui.cc in Sources */ = {isa = PBXBuildFile; fileRef = 060ECAED1BB22A4400CE9B80 /* ui.cc */; settings = {ASSET_TAGS = (); }; };
+		060ECAF11BB243B000CE9B80 /* color.v.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 060ECAF01BB243B000CE9B80 /* color.v.glsl */; settings = {ASSET_TAGS = (); }; };
+		060ECAF31BB2441600CE9B80 /* color.p.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 060ECAF21BB2441600CE9B80 /* color.p.glsl */; settings = {ASSET_TAGS = (); }; };
+		060ECAF61BB2496100CE9B80 /* ui.p.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 060ECAF41BB2496100CE9B80 /* ui.p.glsl */; settings = {ASSET_TAGS = (); }; };
+		060ECAF71BB2496100CE9B80 /* ui.v.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 060ECAF51BB2496100CE9B80 /* ui.v.glsl */; settings = {ASSET_TAGS = (); }; };
 		0669D67F1BA85DDE00611CFA /* app_delegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0669D67B1BA85DDE00611CFA /* app_delegate.m */; };
 		0669D6801BA85DDE00611CFA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0669D67C1BA85DDE00611CFA /* main.m */; };
 		0669D6811BA85DDE00611CFA /* viewctl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0669D67E1BA85DDE00611CFA /* viewctl.m */; };
@@ -118,6 +133,34 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		060ECAC91BB1A9CC00CE9B80 /* boolanm.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = boolanm.cc; path = libs/goatkit/boolanm.cc; sourceTree = "<group>"; };
+		060ECACA1BB1A9CC00CE9B80 /* boolanm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = boolanm.h; path = libs/goatkit/boolanm.h; sourceTree = "<group>"; };
+		060ECACB1BB1A9CC00CE9B80 /* button.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = button.cc; path = libs/goatkit/button.cc; sourceTree = "<group>"; };
+		060ECACD1BB1A9CC00CE9B80 /* event.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = event.cc; path = libs/goatkit/event.cc; sourceTree = "<group>"; };
+		060ECACF1BB1A9CC00CE9B80 /* screen.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = screen.cc; path = libs/goatkit/screen.cc; sourceTree = "<group>"; };
+		060ECAD01BB1A9CC00CE9B80 /* slider.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = slider.cc; path = libs/goatkit/slider.cc; sourceTree = "<group>"; };
+		060ECAD11BB1A9CC00CE9B80 /* textbox.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = textbox.cc; path = libs/goatkit/textbox.cc; sourceTree = "<group>"; };
+		060ECAD21BB1A9CC00CE9B80 /* theme.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = theme.cc; path = libs/goatkit/theme.cc; sourceTree = "<group>"; };
+		060ECAD31BB1A9CC00CE9B80 /* widget.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = widget.cc; path = libs/goatkit/widget.cc; sourceTree = "<group>"; };
+		060ECADE1BB1AA5200CE9B80 /* button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = button.h; path = libs/goatkit/button.h; sourceTree = "<group>"; };
+		060ECADF1BB1AA5200CE9B80 /* checkbox.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = checkbox.cc; path = libs/goatkit/checkbox.cc; sourceTree = "<group>"; };
+		060ECAE01BB1AA5200CE9B80 /* checkbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = checkbox.h; path = libs/goatkit/checkbox.h; sourceTree = "<group>"; };
+		060ECAE11BB1AA5200CE9B80 /* event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = event.h; path = libs/goatkit/event.h; sourceTree = "<group>"; };
+		060ECAE21BB1AA5200CE9B80 /* goatkit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = goatkit.h; path = libs/goatkit/goatkit.h; sourceTree = "<group>"; };
+		060ECAE31BB1AA5200CE9B80 /* label.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = label.cc; path = libs/goatkit/label.cc; sourceTree = "<group>"; };
+		060ECAE41BB1AA5200CE9B80 /* label.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = label.h; path = libs/goatkit/label.h; sourceTree = "<group>"; };
+		060ECAE51BB1AA5200CE9B80 /* screen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = screen.h; path = libs/goatkit/screen.h; sourceTree = "<group>"; };
+		060ECAE61BB1AA5200CE9B80 /* slider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = slider.h; path = libs/goatkit/slider.h; sourceTree = "<group>"; };
+		060ECAE71BB1AA5200CE9B80 /* textbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = textbox.h; path = libs/goatkit/textbox.h; sourceTree = "<group>"; };
+		060ECAE81BB1AA5200CE9B80 /* theme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = theme.h; path = libs/goatkit/theme.h; sourceTree = "<group>"; };
+		060ECAE91BB1AA5200CE9B80 /* vec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vec.h; path = libs/goatkit/vec.h; sourceTree = "<group>"; };
+		060ECAEA1BB1AA5200CE9B80 /* widget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = widget.h; path = libs/goatkit/widget.h; sourceTree = "<group>"; };
+		060ECAED1BB22A4400CE9B80 /* ui.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ui.cc; path = src/ui.cc; sourceTree = "<group>"; };
+		060ECAEE1BB22A4400CE9B80 /* ui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ui.h; path = src/ui.h; sourceTree = "<group>"; };
+		060ECAF01BB243B000CE9B80 /* color.v.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = color.v.glsl; path = sdr/color.v.glsl; sourceTree = "<group>"; };
+		060ECAF21BB2441600CE9B80 /* color.p.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = color.p.glsl; path = sdr/color.p.glsl; sourceTree = "<group>"; };
+		060ECAF41BB2496100CE9B80 /* ui.p.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ui.p.glsl; path = sdr/ui.p.glsl; sourceTree = "<group>"; };
+		060ECAF51BB2496100CE9B80 /* ui.v.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ui.v.glsl; path = sdr/ui.v.glsl; sourceTree = "<group>"; };
 		0669D6471BA851BE00611CFA /* istereo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = istereo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0669D6741BA858BF00611CFA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ios/Info.plist; sourceTree = "<group>"; };
 		0669D67A1BA85DDE00611CFA /* app_delegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = app_delegate.h; path = src/ios/app_delegate.h; sourceTree = "<group>"; };
@@ -139,7 +182,6 @@
 		0669D68D1BACDF6C00611CFA /* sdr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sdr.h; path = src/sdr.h; sourceTree = "<group>"; };
 		0669D68E1BACDF6C00611CFA /* tex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = tex.c; path = src/tex.c; sourceTree = "<group>"; };
 		0669D68F1BACDF6C00611CFA /* tex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tex.h; path = src/tex.h; sourceTree = "<group>"; };
-		0669D6901BACDF6C00611CFA /* ui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ui.h; path = src/ui.h; sourceTree = "<group>"; };
 		0669D69D1BAD020B00611CFA /* basis_c.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = basis_c.c; path = libs/vmath/basis_c.c; sourceTree = "<group>"; };
 		0669D69E1BAD020B00611CFA /* basis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = basis.h; path = libs/vmath/basis.h; sourceTree = "<group>"; };
 		0669D69F1BAD020B00611CFA /* geom.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = geom.c; path = libs/vmath/geom.c; sourceTree = "<group>"; };
@@ -293,6 +335,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		060ECAC81BB1A9BA00CE9B80 /* goatkit */ = {
+			isa = PBXGroup;
+			children = (
+				060ECADE1BB1AA5200CE9B80 /* button.h */,
+				060ECADF1BB1AA5200CE9B80 /* checkbox.cc */,
+				060ECAE01BB1AA5200CE9B80 /* checkbox.h */,
+				060ECAE11BB1AA5200CE9B80 /* event.h */,
+				060ECAE21BB1AA5200CE9B80 /* goatkit.h */,
+				060ECAE31BB1AA5200CE9B80 /* label.cc */,
+				060ECAE41BB1AA5200CE9B80 /* label.h */,
+				060ECAE51BB1AA5200CE9B80 /* screen.h */,
+				060ECAE61BB1AA5200CE9B80 /* slider.h */,
+				060ECAE71BB1AA5200CE9B80 /* textbox.h */,
+				060ECAE81BB1AA5200CE9B80 /* theme.h */,
+				060ECAE91BB1AA5200CE9B80 /* vec.h */,
+				060ECAEA1BB1AA5200CE9B80 /* widget.h */,
+				060ECAC91BB1A9CC00CE9B80 /* boolanm.cc */,
+				060ECACA1BB1A9CC00CE9B80 /* boolanm.h */,
+				060ECACB1BB1A9CC00CE9B80 /* button.cc */,
+				060ECACD1BB1A9CC00CE9B80 /* event.cc */,
+				060ECACF1BB1A9CC00CE9B80 /* screen.cc */,
+				060ECAD01BB1A9CC00CE9B80 /* slider.cc */,
+				060ECAD11BB1A9CC00CE9B80 /* textbox.cc */,
+				060ECAD21BB1A9CC00CE9B80 /* theme.cc */,
+				060ECAD31BB1A9CC00CE9B80 /* widget.cc */,
+			);
+			name = goatkit;
+			sourceTree = "<group>";
+		};
 		0669D63E1BA851BE00611CFA = {
 			isa = PBXGroup;
 			children = (
@@ -317,6 +388,8 @@
 		0669D6761BA858D600611CFA /* src */ = {
 			isa = PBXGroup;
 			children = (
+				060ECAED1BB22A4400CE9B80 /* ui.cc */,
+				060ECAEE1BB22A4400CE9B80 /* ui.h */,
 				0669D6821BACDF6C00611CFA /* cam.c */,
 				0669D6831BACDF6C00611CFA /* cam.h */,
 				0669D6841BACDF6C00611CFA /* config.h */,
@@ -331,7 +404,6 @@
 				0669D68D1BACDF6C00611CFA /* sdr.h */,
 				0669D68E1BACDF6C00611CFA /* tex.c */,
 				0669D68F1BACDF6C00611CFA /* tex.h */,
-				0669D6901BACDF6C00611CFA /* ui.h */,
 				0669D6791BA85DCC00611CFA /* ios */,
 			);
 			name = src;
@@ -352,6 +424,7 @@
 		0669D6971BAD01C200611CFA /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				060ECAC81BB1A9BA00CE9B80 /* goatkit */,
 				0669D69C1BAD01EA00611CFA /* vmath */,
 				0669D69B1BAD01E300611CFA /* imago2 */,
 				0669D69A1BAD01DD00611CFA /* jpeglib */,
@@ -528,12 +601,16 @@
 		0669D77B1BAD028300611CFA /* sdr */ = {
 			isa = PBXGroup;
 			children = (
+				060ECAF41BB2496100CE9B80 /* ui.p.glsl */,
+				060ECAF51BB2496100CE9B80 /* ui.v.glsl */,
 				0669D77C1BAD02A200611CFA /* test.p.glsl */,
 				0669D77D1BAD02A200611CFA /* test.v.glsl */,
 				0669D77E1BAD02A200611CFA /* text.p.glsl */,
 				0669D77F1BAD02A200611CFA /* text.v.glsl */,
 				0669D7801BAD02A200611CFA /* tunnel.p.glsl */,
 				0669D7811BAD02A200611CFA /* tunnel.v.glsl */,
+				060ECAF01BB243B000CE9B80 /* color.v.glsl */,
+				060ECAF21BB2441600CE9B80 /* color.p.glsl */,
 			);
 			name = sdr;
 			sourceTree = "<group>";
@@ -610,8 +687,12 @@
 				0669D7861BAD02A200611CFA /* tunnel.p.glsl in Resources */,
 				0669D7821BAD02A200611CFA /* test.p.glsl in Resources */,
 				0669D78D1BAD02DC00611CFA /* stonewall_normal.jpg in Resources */,
+				060ECAF11BB243B000CE9B80 /* color.v.glsl in Resources */,
 				0669D78E1BAD02DC00611CFA /* stonewall.jpg in Resources */,
+				060ECAF61BB2496100CE9B80 /* ui.p.glsl in Resources */,
+				060ECAF71BB2496100CE9B80 /* ui.v.glsl in Resources */,
 				0669D7841BAD02A200611CFA /* text.p.glsl in Resources */,
+				060ECAF31BB2441600CE9B80 /* color.p.glsl in Resources */,
 				06ED084A1BAF9A2E00C1211D /* icons.xcassets in Resources */,
 				0669D7901BAD02DC00611CFA /* tiles.jpg in Resources */,
 				0669D7871BAD02A200611CFA /* tunnel.v.glsl in Resources */,
@@ -644,11 +725,13 @@
 				0669D6CC1BAD022C00611CFA /* modules.c in Sources */,
 				0669D7301BAD024700611CFA /* jmemmgr.c in Sources */,
 				0669D72E1BAD024700611CFA /* jidctint.c in Sources */,
+				060ECAD41BB1A9CC00CE9B80 /* boolanm.cc in Sources */,
 				0669D6B81BAD020B00611CFA /* ray_c.c in Sources */,
 				0669D71D1BAD024700611CFA /* jddctmgr.c in Sources */,
 				0669D7571BAD025B00611CFA /* pngwtran.c in Sources */,
 				0669D7081BAD024700611CFA /* jcapistd.c in Sources */,
 				0669D72C1BAD024700611CFA /* jidctflt.c in Sources */,
+				060ECADB1BB1A9CC00CE9B80 /* textbox.cc in Sources */,
 				0669D7511BAD025B00611CFA /* pngrutil.c in Sources */,
 				0669D6BB1BAD020B00611CFA /* vmath.c in Sources */,
 				0669D7341BAD024700611CFA /* jutils.c in Sources */,
@@ -670,19 +753,25 @@
 				0669D7521BAD025B00611CFA /* pngset.c in Sources */,
 				0669D7561BAD025B00611CFA /* pngwrite.c in Sources */,
 				0669D7131BAD024700611CFA /* jcphuff.c in Sources */,
+				060ECAD91BB1A9CC00CE9B80 /* screen.cc in Sources */,
 				0669D70A1BAD024700611CFA /* jccolor.c in Sources */,
+				060ECADD1BB1A9CC00CE9B80 /* widget.cc in Sources */,
 				0669D74F1BAD025B00611CFA /* pngrio.c in Sources */,
 				0669D6C81BAD022C00611CFA /* file_png.c in Sources */,
 				0669D7231BAD024700611CFA /* jdmerge.c in Sources */,
 				0669D77A1BAD027000611CFA /* zutil.c in Sources */,
 				0669D7721BAD027000611CFA /* deflate.c in Sources */,
+				060ECAEB1BB1AA5200CE9B80 /* checkbox.cc in Sources */,
 				0669D71F1BAD024700611CFA /* jdinput.c in Sources */,
 				0669D7581BAD025B00611CFA /* pngwutil.c in Sources */,
 				0669D7261BAD024700611CFA /* jdsample.c in Sources */,
 				0669D7701BAD027000611CFA /* compress.c in Sources */,
 				0669D7111BAD024700611CFA /* jcomapi.c in Sources */,
 				0669D71A1BAD024700611CFA /* jdatasrc.c in Sources */,
+				060ECADC1BB1A9CC00CE9B80 /* theme.cc in Sources */,
 				0669D74B1BAD025B00611CFA /* pngget.c in Sources */,
+				060ECAD71BB1A9CC00CE9B80 /* event.cc in Sources */,
+				060ECAD51BB1A9CC00CE9B80 /* button.cc in Sources */,
 				0669D7211BAD024700611CFA /* jdmarker.c in Sources */,
 				0669D7251BAD024700611CFA /* jdpostct.c in Sources */,
 				0669D6811BA85DDE00611CFA /* viewctl.m in Sources */,
@@ -702,10 +791,12 @@
 				0669D7271BAD024700611CFA /* jdtrans.c in Sources */,
 				0669D6B21BAD020B00611CFA /* basis_c.c in Sources */,
 				0669D7161BAD024700611CFA /* jctrans.c in Sources */,
+				060ECADA1BB1A9CC00CE9B80 /* slider.cc in Sources */,
 				0669D7311BAD024700611CFA /* jmemnobs.c in Sources */,
 				0669D74E1BAD025B00611CFA /* pngread.c in Sources */,
 				0669D71E1BAD024700611CFA /* jdhuff.c in Sources */,
 				0669D74A1BAD025B00611CFA /* pnggccrd.c in Sources */,
+				060ECAEF1BB22A4400CE9B80 /* ui.cc in Sources */,
 				0669D70E1BAD024700611CFA /* jcmainct.c in Sources */,
 				0669D7151BAD024700611CFA /* jcsample.c in Sources */,
 				0669D7141BAD024700611CFA /* jcprepct.c in Sources */,
@@ -717,6 +808,7 @@
 				0669D7071BAD024700611CFA /* jcapimin.c in Sources */,
 				0669D6C61BAD022C00611CFA /* conv.c in Sources */,
 				0669D6B41BAD020B00611CFA /* matrix_c.c in Sources */,
+				060ECAEC1BB1AA5200CE9B80 /* label.cc in Sources */,
 				0669D7321BAD024700611CFA /* jquant1.c in Sources */,
 				0669D6C91BAD022C00611CFA /* file_ppm.c in Sources */,
 				0669D72D1BAD024700611CFA /* jidctfst.c in Sources */,
@@ -820,6 +912,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					HAVE_OPENGL_H,
+				);
+				HEADER_SEARCH_PATHS = libs;
 				INFOPLIST_FILE = "$(SRCROOT)/ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -834,6 +931,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_PREPROCESSOR_DEFINITIONS = HAVE_OPENGL_H;
+				HEADER_SEARCH_PATHS = libs;
 				INFOPLIST_FILE = "$(SRCROOT)/ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

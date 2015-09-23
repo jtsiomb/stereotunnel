@@ -74,6 +74,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define glVertexAttrib4f	gl_vertex_attrib4f
 #endif
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* matrix stuff */
 void gl_matrix_mode(int mmode);
 void gl_push_matrix(void);
@@ -110,5 +114,9 @@ void gl_texcoord2f(float s, float t);
 void gl_vertex_attrib2f(int loc, float x, float y);
 void gl_vertex_attrib3f(int loc, float x, float y, float z);
 void gl_vertex_attrib4f(int loc, float x, float y, float z, float w);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif	/* SANEGL_H_ */

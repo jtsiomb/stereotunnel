@@ -22,8 +22,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "config.h"
 
-#ifdef IPHONE
+#if defined(IPHONE) || defined(__IPHONE__)
 #include <OpenGLES/ES2/gl.h>
+
+#define glClearDepth	glClearDepthf
+#define GLDEF
+#include "sanegl.h"
 #else
 
 #include <GL/glew.h>

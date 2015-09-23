@@ -152,6 +152,34 @@
 	printf("viewport %dx%d (scale: %g)\n", xsz, ysz, pixel_scale);
 }
 
+- (void)touchesBegan: (NSSet<UITouch*>*)touches withEvent: (UIEvent*)event
+{
+	UITouch *touch = [touches anyObject];
+	CGPoint pt = [touch locationInView: nil];
+	mouse_button(0, 1, pt.x, pt.y);
+}
+
+- (void)touchesMoved: (NSSet<UITouch*>*)touches withEvent: (UIEvent*)event
+{
+	UITouch *touch = [touches anyObject];
+	CGPoint pt = [touch locationInView: nil];
+	mouse_motion(pt.x, pt.y);
+}
+
+- (void)touchesEnded: (NSSet<UITouch*>*)touches withEvent: (UIEvent*)event
+{
+	UITouch *touch = [touches anyObject];
+	CGPoint pt = [touch locationInView: nil];
+	mouse_button(0, 0, pt.x, pt.y);
+}
+
+- (void)touchesCancelled: (NSSet<UITouch*>*)touches withEvent: (UIEvent*)event
+{
+	UITouch *touch = [touches anyObject];
+	CGPoint pt = [touch locationInView: nil];
+	mouse_button(0, 0, pt.x, pt.y);
+}
+
 // ADBannerDelegate functions
 
 - (void)bannerViewDidLoadAd: (ADBannerView*)banner

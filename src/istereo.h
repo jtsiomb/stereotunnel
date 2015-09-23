@@ -24,5 +24,7 @@ int init(void);
 void cleanup(void);
 void redraw(void);
 void reshape(int x, int y);
+void mouse_button(int bn, int press, int x, int y);
+void mouse_motion(int x, int y);
 
 #endif	/* ISTEREO_H_ */

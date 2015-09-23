@@ -1,6 +1,6 @@
 /*
 Stereoscopic tunnel for iOS.
-Copyright (C) 2011  John Tsiombikas <nuclear@member.fsf.org>
+Copyright (C) 2011-2015  John Tsiombikas <nuclear@member.fsf.org>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -30,6 +30,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "cam.h"
 #include "vmath.h"
 #include "config.h"
+#include "ui.h"
 
 static void render(float t);
 static void draw_tunnel(float t);
@@ -40,13 +41,14 @@ static void worm(float t, float z, float *tx, float *ty);
 static unsigned int get_shader_program(const char *vfile, const char *pfile);
 static float get_sec(void);
 
-unsigned int prog, prog_simple, prog_tunnel, prog_text;
+unsigned int prog, prog_simple, prog_tunnel, prog_text, prog_color, prog_ui;
 unsigned int tex, tex_stones, tex_normal, tex_text;
 
 int view_xsz, view_ysz;
 
 int stereo = 0;
 int use_bump = 0;
+int show_opt = 1;
 
 /* construction parameters */
 int sides = 24;
@@ -72,6 +74,12 @@ int init(void)
 	if(!(prog_text = get_shader_program("text.v.glsl", "text.p.glsl"))) {
 		return -1;
 	}
+	if(!(prog_color = get_shader_program("color.v.glsl", "color.p.glsl"))) {
+		return -1;
+	}
+	if(!(prog_ui = get_shader_program("ui.v.glsl", "ui.p.glsl"))) {
+		return -1;
+	}
 
 	if(!(tex = load_texture(find_resource("tiles.jpg", 0, 0)))) {
 		return -1;
@@ -89,6 +97,10 @@ int init(void)
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 
+	if(ui_init() == -1) {
+		return -1;
+	}
+
 	cam_fov(42.5);
 	cam_clip(0.5, 250.0);
 
@@ -97,7 +109,11 @@ int init(void)
 
 void cleanup(void)
 {
-	free_program(prog);
+	ui_shutdown();
+	free_program(prog_simple);
+	free_program(prog_tunnel);
+	free_program(prog_color);
+	free_program(prog_ui);
 }
 
 void redraw(void)
@@ -186,6 +202,10 @@ static void render(float t)
 			draw_text(text_line, tpos, 1.5 / (float)i);
 		}
 		glDepthMask(1);
+	}
+
+	if(show_opt) {
+		ui_draw();
 	}
 }
 
@@ -360,6 +380,22 @@ void reshape(int x, int y)
 
 	view_xsz = x;
 	view_ysz = y;
+
+	ui_reshape(x, y);
+}
+
+void mouse_button(int bn, int press, int x, int y)
+{
+	if(show_opt) {
+		ui_button(bn, press, x, y);
+	}
+}
+
+void mouse_motion(int x, int y)
+{
+	if(show_opt) {
+		ui_motion(x, y);
+	}
 }
 
 static unsigned int get_shader_program(const char *vfile, const char *pfile)

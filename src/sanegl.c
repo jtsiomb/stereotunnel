@@ -21,6 +21,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <string.h>
 #include <math.h>
 #include <assert.h>
+
+#include "opengl.h"
+
+#ifdef GLDEF
+#undef GLDEF
+#endif
 #include "sanegl.h"
 
 #define MMODE_IDX(x)	((x) - GL_MODELVIEW)
