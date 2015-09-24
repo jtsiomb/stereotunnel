@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "ui.h"
 #include "goatkit/goatkit.h"
 #include "opengl.h"
@@ -64,8 +65,11 @@ int ui_init(void)
 	// load the theme
 	//goatkit::add_theme_path("themes/simple");
 
-	//goatkit::theme = new goatkit::Theme;
-	//goatkit::theme->load("simple");
+	goatkit::theme = new goatkit::Theme;
+	if(!goatkit::theme->load(GOATKIT_THEME_BUILTIN)) {
+		fprintf(stderr, "no builitn theme\n");
+		return -1;
+	}
 
 	return 0;
 }
@@ -91,25 +95,28 @@ void ui_draw(void)
 	gl_load_identity();
 	gl_scalef(2.0 / aspect, 2.0, 1);
 	gl_translatef(-1, -1, 0);
-	gl_scalef(1, -1, 1);
 	gl_matrix_mode(GL_MODELVIEW);
 	gl_push_matrix();
 	gl_load_identity();
 
 	glDisable(GL_CULL_FACE);
 	glDisable(GL_DEPTH_TEST);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	/*gl_begin(GL_QUADS);
-	gl_color3f(1, 0, 0);
+	set_uniform_float4(prog_ui, "ucolor", 0, 0, 0, 0.5);
+
+	gl_begin(GL_QUADS);
+	//gl_color4f(0, 0, 0, 0.5);
 	gl_vertex3f(0, 0, 0);
-	gl_vertex3f(0, 0.5, 0);
-	gl_vertex3f(0.5 * aspect, 0.5, 0);
-	gl_vertex3f(0.5 * aspect, 0, 0);
+	gl_vertex3f(0, 1.0, 0);
+	gl_vertex3f(1.0 * aspect, 1.0, 0);
+	gl_vertex3f(1.0 * aspect, 0, 0);
 	gl_end();
-	*/
 
 	scr.draw();
 
+	glDisable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_DEPTH_TEST);
 
@@ -122,10 +129,10 @@ void ui_draw(void)
 
 void ui_button(int bn, int press, int x, int y)
 {
-	scr.sysev_mouse_button(bn, press != 0, (float)x / (float)width, 1.0 - (float)y / (float)height);
+	scr.sysev_mouse_button(bn, press != 0, (float)x / (float)width, (float)y / (float)height);
 }
 
 void ui_motion(int x, int y)
 {
-	scr.sysev_mouse_motion((float)x / (float)width, 1.0 - (float)y / (float)height);
+	scr.sysev_mouse_motion((float)x / (float)width, (float)y / (float)height);
 }

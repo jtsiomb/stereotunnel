@@ -8,3 +8,4 @@ xcuserdata/
 ^build/
 \.png$
 ^data/
+\.DS_Store

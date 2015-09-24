@@ -22,6 +22,14 @@
 		060ECAF31BB2441600CE9B80 /* color.p.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 060ECAF21BB2441600CE9B80 /* color.p.glsl */; settings = {ASSET_TAGS = (); }; };
 		060ECAF61BB2496100CE9B80 /* ui.p.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 060ECAF41BB2496100CE9B80 /* ui.p.glsl */; settings = {ASSET_TAGS = (); }; };
 		060ECAF71BB2496100CE9B80 /* ui.v.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 060ECAF51BB2496100CE9B80 /* ui.v.glsl */; settings = {ASSET_TAGS = (); }; };
+		060ECAFE1BB2BD5C00CE9B80 /* drawgl.c in Sources */ = {isa = PBXBuildFile; fileRef = 060ECAF91BB2BD5C00CE9B80 /* drawgl.c */; settings = {ASSET_TAGS = (); }; };
+		060ECAFF1BB2BD5C00CE9B80 /* font.c in Sources */ = {isa = PBXBuildFile; fileRef = 060ECAFC1BB2BD5C00CE9B80 /* font.c */; settings = {ASSET_TAGS = (); }; };
+		060ECB001BB2BD5C00CE9B80 /* utf8.c in Sources */ = {isa = PBXBuildFile; fileRef = 060ECAFD1BB2BD5C00CE9B80 /* utf8.c */; settings = {ASSET_TAGS = (); }; };
+		060ECB031BB361C300CE9B80 /* assman.c in Sources */ = {isa = PBXBuildFile; fileRef = 060ECB011BB361C300CE9B80 /* assman.c */; settings = {ASSET_TAGS = (); }; };
+		060ECB051BB361D900CE9B80 /* assman.c in Sources */ = {isa = PBXBuildFile; fileRef = 060ECB041BB361D900CE9B80 /* assman.c */; settings = {ASSET_TAGS = (); }; };
+		060ECB071BB36FD800CE9B80 /* linux-libertine_s24.glyphmap in Resources */ = {isa = PBXBuildFile; fileRef = 060ECB061BB36FD800CE9B80 /* linux-libertine_s24.glyphmap */; settings = {ASSET_TAGS = (); }; };
+		060ECB091BB3989500CE9B80 /* uitheme.cc in Sources */ = {isa = PBXBuildFile; fileRef = 060ECB081BB3989500CE9B80 /* uitheme.cc */; settings = {ASSET_TAGS = (); }; };
+		060ECB0B1BB3A8DB00CE9B80 /* font.p.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 060ECB0A1BB3A8DB00CE9B80 /* font.p.glsl */; settings = {ASSET_TAGS = (); }; };
 		0669D67F1BA85DDE00611CFA /* app_delegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0669D67B1BA85DDE00611CFA /* app_delegate.m */; };
 		0669D6801BA85DDE00611CFA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0669D67C1BA85DDE00611CFA /* main.m */; };
 		0669D6811BA85DDE00611CFA /* viewctl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0669D67E1BA85DDE00611CFA /* viewctl.m */; };
@@ -161,6 +169,17 @@
 		060ECAF21BB2441600CE9B80 /* color.p.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = color.p.glsl; path = sdr/color.p.glsl; sourceTree = "<group>"; };
 		060ECAF41BB2496100CE9B80 /* ui.p.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ui.p.glsl; path = sdr/ui.p.glsl; sourceTree = "<group>"; };
 		060ECAF51BB2496100CE9B80 /* ui.v.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ui.v.glsl; path = sdr/ui.v.glsl; sourceTree = "<group>"; };
+		060ECAF91BB2BD5C00CE9B80 /* drawgl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = drawgl.c; path = libs/drawtext/drawgl.c; sourceTree = "<group>"; };
+		060ECAFA1BB2BD5C00CE9B80 /* drawtext_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = drawtext_impl.h; path = libs/drawtext/drawtext_impl.h; sourceTree = "<group>"; };
+		060ECAFB1BB2BD5C00CE9B80 /* drawtext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = drawtext.h; path = libs/drawtext/drawtext.h; sourceTree = "<group>"; };
+		060ECAFC1BB2BD5C00CE9B80 /* font.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = font.c; path = libs/drawtext/font.c; sourceTree = "<group>"; };
+		060ECAFD1BB2BD5C00CE9B80 /* utf8.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = utf8.c; path = libs/drawtext/utf8.c; sourceTree = "<group>"; };
+		060ECB011BB361C300CE9B80 /* assman.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = assman.c; path = src/assman.c; sourceTree = "<group>"; };
+		060ECB021BB361C300CE9B80 /* assman.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = assman.h; path = src/assman.h; sourceTree = "<group>"; };
+		060ECB041BB361D900CE9B80 /* assman.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = assman.c; path = src/ios/assman.c; sourceTree = "<group>"; };
+		060ECB061BB36FD800CE9B80 /* linux-libertine_s24.glyphmap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "linux-libertine_s24.glyphmap"; path = "data/linux-libertine_s24.glyphmap"; sourceTree = "<group>"; };
+		060ECB081BB3989500CE9B80 /* uitheme.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = uitheme.cc; path = src/uitheme.cc; sourceTree = "<group>"; };
+		060ECB0A1BB3A8DB00CE9B80 /* font.p.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = font.p.glsl; path = sdr/font.p.glsl; sourceTree = "<group>"; };
 		0669D6471BA851BE00611CFA /* istereo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = istereo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0669D6741BA858BF00611CFA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ios/Info.plist; sourceTree = "<group>"; };
 		0669D67A1BA85DDE00611CFA /* app_delegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = app_delegate.h; path = src/ios/app_delegate.h; sourceTree = "<group>"; };
@@ -364,6 +383,18 @@
 			name = goatkit;
 			sourceTree = "<group>";
 		};
+		060ECAF81BB2BD4B00CE9B80 /* drawtext */ = {
+			isa = PBXGroup;
+			children = (
+				060ECAF91BB2BD5C00CE9B80 /* drawgl.c */,
+				060ECAFA1BB2BD5C00CE9B80 /* drawtext_impl.h */,
+				060ECAFB1BB2BD5C00CE9B80 /* drawtext.h */,
+				060ECAFC1BB2BD5C00CE9B80 /* font.c */,
+				060ECAFD1BB2BD5C00CE9B80 /* utf8.c */,
+			);
+			name = drawtext;
+			sourceTree = "<group>";
+		};
 		0669D63E1BA851BE00611CFA = {
 			isa = PBXGroup;
 			children = (
@@ -388,7 +419,10 @@
 		0669D6761BA858D600611CFA /* src */ = {
 			isa = PBXGroup;
 			children = (
+				060ECB011BB361C300CE9B80 /* assman.c */,
+				060ECB021BB361C300CE9B80 /* assman.h */,
 				060ECAED1BB22A4400CE9B80 /* ui.cc */,
+				060ECB081BB3989500CE9B80 /* uitheme.cc */,
 				060ECAEE1BB22A4400CE9B80 /* ui.h */,
 				0669D6821BACDF6C00611CFA /* cam.c */,
 				0669D6831BACDF6C00611CFA /* cam.h */,
@@ -412,6 +446,7 @@
 		0669D6791BA85DCC00611CFA /* ios */ = {
 			isa = PBXGroup;
 			children = (
+				060ECB041BB361D900CE9B80 /* assman.c */,
 				0669D67A1BA85DDE00611CFA /* app_delegate.h */,
 				0669D67B1BA85DDE00611CFA /* app_delegate.m */,
 				0669D67C1BA85DDE00611CFA /* main.m */,
@@ -424,6 +459,7 @@
 		0669D6971BAD01C200611CFA /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				060ECAF81BB2BD4B00CE9B80 /* drawtext */,
 				060ECAC81BB1A9BA00CE9B80 /* goatkit */,
 				0669D69C1BAD01EA00611CFA /* vmath */,
 				0669D69B1BAD01E300611CFA /* imago2 */,
@@ -601,6 +637,7 @@
 		0669D77B1BAD028300611CFA /* sdr */ = {
 			isa = PBXGroup;
 			children = (
+				060ECB0A1BB3A8DB00CE9B80 /* font.p.glsl */,
 				060ECAF41BB2496100CE9B80 /* ui.p.glsl */,
 				060ECAF51BB2496100CE9B80 /* ui.v.glsl */,
 				0669D77C1BAD02A200611CFA /* test.p.glsl */,
@@ -618,6 +655,7 @@
 		0669D7881BAD02B000611CFA /* data */ = {
 			isa = PBXGroup;
 			children = (
+				060ECB061BB36FD800CE9B80 /* linux-libertine_s24.glyphmap */,
 				0669D7891BAD02DC00611CFA /* stonewall_normal.jpg */,
 				0669D78A1BAD02DC00611CFA /* stonewall.jpg */,
 				0669D78B1BAD02DC00611CFA /* text.png */,
@@ -697,8 +735,10 @@
 				0669D7901BAD02DC00611CFA /* tiles.jpg in Resources */,
 				0669D7871BAD02A200611CFA /* tunnel.v.glsl in Resources */,
 				0669D78F1BAD02DC00611CFA /* text.png in Resources */,
+				060ECB0B1BB3A8DB00CE9B80 /* font.p.glsl in Resources */,
 				0669D7851BAD02A200611CFA /* text.v.glsl in Resources */,
 				0669D7831BAD02A200611CFA /* test.v.glsl in Resources */,
+				060ECB071BB36FD800CE9B80 /* linux-libertine_s24.glyphmap in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -709,6 +749,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				060ECB001BB2BD5C00CE9B80 /* utf8.c in Sources */,
 				0669D7121BAD024700611CFA /* jcparam.c in Sources */,
 				0669D7551BAD025B00611CFA /* pngwio.c in Sources */,
 				0669D70F1BAD024700611CFA /* jcmarker.c in Sources */,
@@ -729,6 +770,7 @@
 				0669D6B81BAD020B00611CFA /* ray_c.c in Sources */,
 				0669D71D1BAD024700611CFA /* jddctmgr.c in Sources */,
 				0669D7571BAD025B00611CFA /* pngwtran.c in Sources */,
+				060ECB051BB361D900CE9B80 /* assman.c in Sources */,
 				0669D7081BAD024700611CFA /* jcapistd.c in Sources */,
 				0669D72C1BAD024700611CFA /* jidctflt.c in Sources */,
 				060ECADB1BB1A9CC00CE9B80 /* textbox.cc in Sources */,
@@ -739,6 +781,7 @@
 				0669D7281BAD024700611CFA /* jerror.c in Sources */,
 				0669D7221BAD024700611CFA /* jdmaster.c in Sources */,
 				0669D76F1BAD027000611CFA /* adler32.c in Sources */,
+				060ECAFF1BB2BD5C00CE9B80 /* font.c in Sources */,
 				0669D7541BAD025B00611CFA /* pngvcrd.c in Sources */,
 				0669D72A1BAD024700611CFA /* jfdctfst.c in Sources */,
 				0669D7791BAD027000611CFA /* uncompr.c in Sources */,
@@ -765,7 +808,9 @@
 				0669D71F1BAD024700611CFA /* jdinput.c in Sources */,
 				0669D7581BAD025B00611CFA /* pngwutil.c in Sources */,
 				0669D7261BAD024700611CFA /* jdsample.c in Sources */,
+				060ECAFE1BB2BD5C00CE9B80 /* drawgl.c in Sources */,
 				0669D7701BAD027000611CFA /* compress.c in Sources */,
+				060ECB031BB361C300CE9B80 /* assman.c in Sources */,
 				0669D7111BAD024700611CFA /* jcomapi.c in Sources */,
 				0669D71A1BAD024700611CFA /* jdatasrc.c in Sources */,
 				060ECADC1BB1A9CC00CE9B80 /* theme.cc in Sources */,
@@ -803,6 +848,7 @@
 				0669D7751BAD027000611CFA /* inffast.c in Sources */,
 				0669D7491BAD025B00611CFA /* pngerror.c in Sources */,
 				0669D7171BAD024700611CFA /* jdapimin.c in Sources */,
+				060ECB091BB3989500CE9B80 /* uitheme.cc in Sources */,
 				0669D7331BAD024700611CFA /* jquant2.c in Sources */,
 				0669D74D1BAD025B00611CFA /* pngpread.c in Sources */,
 				0669D7071BAD024700611CFA /* jcapimin.c in Sources */,
@@ -915,6 +961,8 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					HAVE_OPENGL_H,
+					HAVE_CONFIG_H,
+					NO_FREETYPE,
 				);
 				HEADER_SEARCH_PATHS = libs;
 				INFOPLIST_FILE = "$(SRCROOT)/ios/Info.plist";
@@ -931,7 +979,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				GCC_PREPROCESSOR_DEFINITIONS = HAVE_OPENGL_H;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					HAVE_OPENGL_H,
+					HAVE_CONFIG_H,
+					NO_FREETYPE,
+				);
 				HEADER_SEARCH_PATHS = libs;
 				INFOPLIST_FILE = "$(SRCROOT)/ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;

@@ -18,6 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef THEME_H_
 #define THEME_H_
 
+#define GOATKIT_THEME_BUILTIN	"GOATKIT_THEME_BUILTIN"
+
 namespace goatkit {
 
 class Widget;

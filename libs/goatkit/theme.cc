@@ -103,30 +103,34 @@ bool Theme::load(const char *name)
 {
 	unload();
 
-	std::string fname = std::string(name) + ".gtheme";
-	if(!(impl->so = dlopen(fname.c_str(), RTLD_LAZY))) {
-		for(size_t i=0; i<search_paths.size(); i++) {
-			std::string path = search_paths[i] + "/" + fname;
-
-			if((impl->so = dlopen(path.c_str(), RTLD_LAZY))) {
-				break;
-			}
-		}
-
-		// try the fallback paths
-		if(!impl->so) {
-			for(int i=0; fallback_paths[i]; i++) {
-				std::string path = std::string(fallback_paths[i]) + "/" + fname;
+	if(strcmp(name, "GOATKIT_THEME_BUILTIN") == 0) {
+		impl->so = RTLD_DEFAULT;
+	} else {
+		std::string fname = std::string(name) + ".gtheme";
+		if(!(impl->so = dlopen(fname.c_str(), RTLD_LAZY))) {
+			for(size_t i=0; i<search_paths.size(); i++) {
+				std::string path = search_paths[i] + "/" + fname;
 
 				if((impl->so = dlopen(path.c_str(), RTLD_LAZY))) {
 					break;
 				}
 			}
-		}
 
-		if(!impl->so) {
-			fprintf(stderr, "%s: failed to load theme plugin: %s\n", __func__, name);
-			return false;
+			// try the fallback paths
+			if(!impl->so) {
+				for(int i=0; fallback_paths[i]; i++) {
+					std::string path = std::string(fallback_paths[i]) + "/" + fname;
+
+					if((impl->so = dlopen(path.c_str(), RTLD_LAZY))) {
+						break;
+					}
+				}
+			}
+
+			if(!impl->so) {
+				fprintf(stderr, "%s: failed to load theme plugin: %s\n", __func__, name);
+				return false;
+			}
 		}
 	}
 
@@ -144,7 +148,9 @@ bool Theme::load(const char *name)
 void Theme::unload()
 {
 	if(impl->so) {
-		dlclose(impl->so);
+		if(impl->so != RTLD_DEFAULT) {
+			dlclose(impl->so);
+		}
 		impl->so = 0;
 	}
 	impl->func_cache.clear();
@@ -248,6 +254,9 @@ static void dlclose(void *so)
 
 static void *dlsym(void *so, const char *symbol)
 {
+	if(so == RTLD_DEFAULT) {
+		so = GetModuleHandle(0);
+	}
 	return (void*)GetProcAddress(so, symbol);
 }
 #endif

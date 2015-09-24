@@ -31,6 +31,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "vmath.h"
 #include "config.h"
 #include "ui.h"
+#include "drawtext.h"
 
 static void render(float t);
 static void draw_tunnel(float t);
@@ -41,8 +42,9 @@ static void worm(float t, float z, float *tx, float *ty);
 static unsigned int get_shader_program(const char *vfile, const char *pfile);
 static float get_sec(void);
 
-unsigned int prog, prog_simple, prog_tunnel, prog_text, prog_color, prog_ui;
+unsigned int prog, prog_simple, prog_tunnel, prog_text, prog_color, prog_ui, prog_font;
 unsigned int tex, tex_stones, tex_normal, tex_text;
+struct dtx_font *font;
 
 int view_xsz, view_ysz;
 
@@ -80,6 +82,9 @@ int init(void)
 	if(!(prog_ui = get_shader_program("ui.v.glsl", "ui.p.glsl"))) {
 		return -1;
 	}
+	if(!(prog_font = get_shader_program("ui.v.glsl", "font.p.glsl"))) {
+		return -1;
+	}
 
 	if(!(tex = load_texture(find_resource("tiles.jpg", 0, 0)))) {
 		return -1;
@@ -93,6 +98,13 @@ int init(void)
 	if(!(tex_text = load_texture(find_resource("text.png", 0, 0)))) {
 		return -1;
 	}
+
+	if(!(font = dtx_open_font_glyphmap(find_resource("linux-libertine_s24.glyphmap", 0, 0)))) {
+		fprintf(stderr, "failed to load font\n");
+		return -1;
+	}
+	dtx_vertex_attribs(get_attrib_loc(prog_ui, "attr_vertex"), get_attrib_loc(prog_ui, "attr_texcoord"));
+	dtx_use_font(font, 24);
 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
@@ -114,6 +126,8 @@ void cleanup(void)
 	free_program(prog_tunnel);
 	free_program(prog_color);
 	free_program(prog_ui);
+	free_program(prog_font);
+	dtx_close_font(font);
 }
 
 void redraw(void)
@@ -183,6 +197,20 @@ void redraw(void)
 
 		render(tsec);
 	}
+
+	/* TEST */
+	/*bind_program(prog_ui);
+
+	gl_matrix_mode(GL_PROJECTION);
+	gl_load_identity();
+	gl_ortho(0, view_xsz, 0, view_ysz, -1, 1);
+	gl_matrix_mode(GL_MODELVIEW);
+	gl_load_identity();
+	gl_apply_xform(prog_ui);
+
+	glDisable(GL_DEPTH_TEST);
+	dtx_printf("hello world\n");
+	glEnable(GL_DEPTH_TEST);*/
 
 	assert(glGetError() == GL_NO_ERROR);
 }
