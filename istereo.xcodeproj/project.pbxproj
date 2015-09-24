@@ -30,6 +30,7 @@
 		060ECB071BB36FD800CE9B80 /* linux-libertine_s24.glyphmap in Resources */ = {isa = PBXBuildFile; fileRef = 060ECB061BB36FD800CE9B80 /* linux-libertine_s24.glyphmap */; settings = {ASSET_TAGS = (); }; };
 		060ECB091BB3989500CE9B80 /* uitheme.cc in Sources */ = {isa = PBXBuildFile; fileRef = 060ECB081BB3989500CE9B80 /* uitheme.cc */; settings = {ASSET_TAGS = (); }; };
 		060ECB0B1BB3A8DB00CE9B80 /* font.p.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 060ECB0A1BB3A8DB00CE9B80 /* font.p.glsl */; settings = {ASSET_TAGS = (); }; };
+		060ECB0E1BB3AC0D00CE9B80 /* timer.c in Sources */ = {isa = PBXBuildFile; fileRef = 060ECB0C1BB3AC0D00CE9B80 /* timer.c */; settings = {ASSET_TAGS = (); }; };
 		0669D67F1BA85DDE00611CFA /* app_delegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0669D67B1BA85DDE00611CFA /* app_delegate.m */; };
 		0669D6801BA85DDE00611CFA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0669D67C1BA85DDE00611CFA /* main.m */; };
 		0669D6811BA85DDE00611CFA /* viewctl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0669D67E1BA85DDE00611CFA /* viewctl.m */; };
@@ -180,6 +181,8 @@
 		060ECB061BB36FD800CE9B80 /* linux-libertine_s24.glyphmap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "linux-libertine_s24.glyphmap"; path = "data/linux-libertine_s24.glyphmap"; sourceTree = "<group>"; };
 		060ECB081BB3989500CE9B80 /* uitheme.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = uitheme.cc; path = src/uitheme.cc; sourceTree = "<group>"; };
 		060ECB0A1BB3A8DB00CE9B80 /* font.p.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = font.p.glsl; path = sdr/font.p.glsl; sourceTree = "<group>"; };
+		060ECB0C1BB3AC0D00CE9B80 /* timer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = timer.c; path = src/timer.c; sourceTree = "<group>"; };
+		060ECB0D1BB3AC0D00CE9B80 /* timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = timer.h; path = src/timer.h; sourceTree = "<group>"; };
 		0669D6471BA851BE00611CFA /* istereo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = istereo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0669D6741BA858BF00611CFA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ios/Info.plist; sourceTree = "<group>"; };
 		0669D67A1BA85DDE00611CFA /* app_delegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = app_delegate.h; path = src/ios/app_delegate.h; sourceTree = "<group>"; };
@@ -419,6 +422,8 @@
 		0669D6761BA858D600611CFA /* src */ = {
 			isa = PBXGroup;
 			children = (
+				060ECB0C1BB3AC0D00CE9B80 /* timer.c */,
+				060ECB0D1BB3AC0D00CE9B80 /* timer.h */,
 				060ECB011BB361C300CE9B80 /* assman.c */,
 				060ECB021BB361C300CE9B80 /* assman.h */,
 				060ECAED1BB22A4400CE9B80 /* ui.cc */,
@@ -751,6 +756,7 @@
 			files = (
 				060ECB001BB2BD5C00CE9B80 /* utf8.c in Sources */,
 				0669D7121BAD024700611CFA /* jcparam.c in Sources */,
+				060ECB0E1BB3AC0D00CE9B80 /* timer.c in Sources */,
 				0669D7551BAD025B00611CFA /* pngwio.c in Sources */,
 				0669D70F1BAD024700611CFA /* jcmarker.c in Sources */,
 				0669D6CB1BAD022C00611CFA /* imago2.c in Sources */,
@@ -958,6 +964,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COMPRESS_PNG_FILES = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					HAVE_OPENGL_H,
@@ -979,6 +986,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COMPRESS_PNG_FILES = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					HAVE_OPENGL_H,
 					HAVE_CONFIG_H,

@@ -32,6 +32,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "config.h"
 #include "ui.h"
 #include "drawtext.h"
+#include "timer.h"
 
 static void render(float t);
 static void draw_tunnel(float t);
@@ -40,7 +41,6 @@ static vec3_t calc_text_pos(float sec);
 static void draw_text(float idx, vec3_t tpos, float alpha);
 static void worm(float t, float z, float *tx, float *ty);
 static unsigned int get_shader_program(const char *vfile, const char *pfile);
-static float get_sec(void);
 
 unsigned int prog, prog_simple, prog_tunnel, prog_text, prog_color, prog_ui, prog_font;
 unsigned int tex, tex_stones, tex_normal, tex_text;
@@ -133,7 +133,7 @@ void cleanup(void)
 void redraw(void)
 {
 	float pan_x, pan_y, z;
-	float tsec = get_sec();
+	float tsec = get_time_sec();
 
 	z = ring_height * segm;
 	worm(tsec, z, &pan_x, &pan_y);
@@ -442,28 +442,3 @@ static unsigned int get_shader_program(const char *vfile, const char *pfile)
 	}
 	return prog;
 }
-
-
-#ifdef IPHONE
-#include <QuartzCore/QuartzCore.h>
-
-static float get_sec(void)
-{
-	static float first;
-	static int init;
-
-	if(!init) {
-		init = 1;
-		first = CACurrentMediaTime();
-		return 0.0f;
-	}
-	return CACurrentMediaTime() - first;
-}
-
-#else
-
-static float get_sec(void)
-{
-	return (float)glutGet(GLUT_ELAPSED_TIME) / 1000.0f;
-}
-#endif
