@@ -2,6 +2,7 @@
 #include <string>
 #include "goatkit/goatkit.h"
 #include "opengl.h"
+#include "sanegl.h"
 #include "drawtext.h"
 #include "sdr.h"
 
@@ -26,8 +27,9 @@ static struct {
 
 static std::map<std::string, WidgetDrawFunc> funcmap;
 
-__attribute__ ((used))
-extern "C" WidgetDrawFunc get_widget_func(const char *name)
+
+extern "C"// __attribute__ ((used))
+WidgetDrawFunc get_widget_func(const char *name)
 {
 	static bool initialized;
 

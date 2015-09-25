@@ -1,6 +1,6 @@
 /*
 Stereoscopic tunnel for iOS.
-Copyright (C) 2011  John Tsiombikas <nuclear@member.fsf.org>
+Copyright (C) 2011-2015 John Tsiombikas <nuclear@member.fsf.org>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -27,6 +27,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 void disp(void);
 void keyb(unsigned char key, int x, int y);
+void mouse(int bn, int st, int x, int y);
+void motion(int x, int y);
 
 int main(int argc, char **argv)
 {
@@ -39,6 +41,8 @@ int main(int argc, char **argv)
 	glutIdleFunc(glutPostRedisplay);
 	glutReshapeFunc(reshape);
 	glutKeyboardFunc(keyb);
+	glutMouseFunc(mouse);
+	glutMotionFunc(motion);
 
 	glewInit();
 
@@ -86,4 +90,14 @@ void keyb(unsigned char key, int x, int y)
 	default:
 		break;
 	}
+}
+
+void mouse(int bn, int st, int x, int y)
+{
+	mouse_button(bn - GLUT_LEFT_BUTTON, st == GLUT_DOWN ? 1 : 0, x, y);
+}
+
+void motion(int x, int y)
+{
+	mouse_motion(x, y);
 }

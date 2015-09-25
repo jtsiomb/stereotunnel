@@ -1,6 +1,6 @@
 /*
 libdrawtext - a simple library for fast text rendering in OpenGL
-Copyright (C) 2011-2012  John Tsiombikas <nuclear@member.fsf.org>
+Copyright (C) 2011-2015  John Tsiombikas <nuclear@member.fsf.org>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Lesser General Public License as published by
@@ -62,7 +62,7 @@ extern int dtx_font_sz;
 
 
 #define fperror(str) \
-	fprintf(stderr, "%s: %s: %s\n", __FUNCTION__, (str), strerror(errno))
+	fprintf(stderr, "%s: %s: %s\n", __func__, (str), strerror(errno))
 
 int dtx_gl_init(void);
 

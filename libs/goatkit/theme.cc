@@ -1,6 +1,6 @@
 /*
 GoatKit - a themable/animated widget toolkit for games
-Copyright (C) 2014  John Tsiombikas <nuclear@member.fsf.org>
+Copyright (C) 2014-2015 John Tsiombikas <nuclear@member.fsf.org>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Lesser General Public License as published by
@@ -21,11 +21,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <string>
 #include <map>
 #include <algorithm>
+#include <string.h>
 #include "theme.h"
 #include "widget.h"
 
 #ifdef WIN32
 #include <windows.h>
+
+#define RTLD_DEFAULT	((void*)0)
 
 static void *dlopen(const char *name, int flags);
 static void dlclose(void *so);

@@ -2,6 +2,7 @@
 #include "ui.h"
 #include "goatkit/goatkit.h"
 #include "opengl.h"
+#include "sanegl.h"
 #include "sdr.h"
 
 static goatkit::Screen scr;
