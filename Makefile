@@ -10,9 +10,16 @@ def = -DNO_FREETYPE
 
 CFLAGS = -pedantic -Wall -g $(def) $(incdir)
 CXXFLAGS = $(CFLAGS)
-LDFLAGS = -lGL -lGLU -lglut -lGLEW -lm -ldl
+LDFLAGS = $(libgl) -lm -ldl
 
 include libs/Makefile
+
+sys := $(shell uname -s)
+ifeq ($(sys), Darwin)
+	libgl = -framework OpenGL -framework GLUT -lGLEW
+else
+	libgl = -lGL -lGLU -lglut -lGLEW
+endif
 
 $(bin): $(obj)
 	$(CXX) -o $@ $(obj) $(LDFLAGS)
