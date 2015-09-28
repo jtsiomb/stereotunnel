@@ -9,3 +9,4 @@ xcuserdata/
 \.png$
 ^data/
 \.DS_Store
+^test$

@@ -28,7 +28,7 @@ static struct {
 static std::map<std::string, WidgetDrawFunc> funcmap;
 
 
-extern "C"// __attribute__ ((used))
+extern "C" __attribute__ ((used))
 WidgetDrawFunc get_widget_func(const char *name)
 {
 	static bool initialized;
