@@ -18,18 +18,23 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef THEME_H_
 #define THEME_H_
 
-#define GOATKIT_THEME_BUILTIN	"GOATKIT_THEME_BUILTIN"
+#define GOATKIT_BUILTIN_THEME(n, f)	\
+	static goatkit::Theme goatkit_theme##__LINE__(n, f)
 
 namespace goatkit {
 
 class Widget;
+class Theme;
+struct ThemeImpl;
 
 typedef void (*WidgetDrawFunc)(const Widget*);
+typedef WidgetDrawFunc (*WidgetLookupFunc)(const char*);
 
 void add_theme_path(const char *path);
 void default_draw_func(const Widget *w);
 
-struct ThemeImpl;
+void register_theme(const char *name, Theme *theme);
+Theme *get_theme(const char *name);
 
 class Theme {
 private:
@@ -37,6 +42,7 @@ private:
 
 public:
 	Theme();
+	Theme(const char *name, WidgetLookupFunc func);
 	~Theme();
 
 	bool load(const char *name);

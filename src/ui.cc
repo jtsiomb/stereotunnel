@@ -66,9 +66,7 @@ int ui_init(void)
 	// load the theme
 	//goatkit::add_theme_path("themes/simple");
 
-	goatkit::theme = new goatkit::Theme;
-	if(!goatkit::theme->load(GOATKIT_THEME_BUILTIN)) {
-		fprintf(stderr, "no builitn theme\n");
+	if(!(goatkit::theme = goatkit::get_theme("istereo"))) {
 		return -1;
 	}
 

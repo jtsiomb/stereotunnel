@@ -42,6 +42,9 @@ WidgetDrawFunc get_widget_func(const char *name)
 	return funcmap[name];
 }
 
+// register ourselves as a built-in theme
+GOATKIT_BUILTIN_THEME("istereo", get_widget_func);
+
 static void begin_drawing(const Widget *w)
 {
 	Vec2 pos = w->get_position();
