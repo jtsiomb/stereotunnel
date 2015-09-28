@@ -56,21 +56,29 @@ public:
 	virtual void hide();
 	virtual float get_visibility() const;
 	virtual bool is_visible() const;
+	virtual void set_visibility_transition(long msec);
+	virtual long get_visibility_transition() const;
 
 	virtual void activate();
 	virtual void deactivate();
 	virtual float get_active() const;
 	virtual bool is_active() const;
+	virtual void set_active_transition(long msec);
+	virtual long get_active_transition() const;
 
 	virtual void press();
 	virtual void release();
 	virtual float get_pressed() const;
 	virtual bool is_pressed() const;
+	virtual void set_press_transition(long msec);
+	virtual long get_press_transition() const;
 
 	virtual void mousein();
 	virtual void mouseout();
 	virtual float get_under_mouse() const;
 	virtual bool is_under_mouse() const;
+	virtual void set_hover_transition(long msec);
+	virtual long get_hover_transition() const;
 
 	// input focus, managed by the screen
 	virtual bool can_focus() const;
@@ -78,6 +86,8 @@ public:
 	virtual void focusout();
 	virtual float get_focus() const;
 	virtual bool is_focused() const;
+	virtual void set_focus_transition(long msec);
+	virtual long get_focus_transition() const;
 
 	virtual void set_position(float x, float y);
 	virtual void set_position(const Vec2 &pos);

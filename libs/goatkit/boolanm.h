@@ -33,6 +33,8 @@ public:
 	BoolAnim(bool st = false);
 
 	void set_transition_duration(long dur);
+	long get_transition_duration() const;
+
 	void set_time_callback(long (*time_func)());
 
 	void set(bool st);

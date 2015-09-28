@@ -22,7 +22,8 @@ else
 endif
 
 $(bin): $(obj)
-	$(CXX) -o $@ $(obj) $(LDFLAGS)
+	@echo "Linking $(bin) ..."
+	@$(CXX) -o $@ $(obj) $(LDFLAGS)
 
 -include $(dep)
 

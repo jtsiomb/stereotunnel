@@ -54,6 +54,11 @@ void BoolAnim::set_transition_duration(long dur)
 	trans_dur = dur;
 }
 
+long BoolAnim::get_transition_duration() const
+{
+	return trans_dur;
+}
+
 void BoolAnim::set_time_callback(long (*time_func)())
 {
 	get_msec = time_func;
