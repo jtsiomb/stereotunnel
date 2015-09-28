@@ -47,6 +47,7 @@ unsigned int tex, tex_stones, tex_normal, tex_text;
 struct dtx_font *font;
 
 int view_xsz, view_ysz;
+float view_aspect;
 
 int stereo = 0;
 int use_bump = 0;
@@ -408,6 +409,7 @@ void reshape(int x, int y)
 
 	view_xsz = x;
 	view_ysz = y;
+	view_aspect = aspect;
 
 	ui_reshape(x, y);
 }

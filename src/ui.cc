@@ -5,30 +5,39 @@
 #include "sanegl.h"
 #include "sdr.h"
 
+using namespace goatkit;
+
+static void done_bn_handler(Widget *w, const Event &ev, void *cls)
+{
+	printf("done\n");
+}
+
 static goatkit::Screen scr;
+static float aspect;
 static int width, height;
 
 extern unsigned int prog_color, prog_ui;
 
 int ui_init(void)
 {
-	float ypos = 0;
+	float xpos = 0.25;
+	float ypos = 0.8;
 	float vsep = 0.1;
 
-	goatkit::Label *label = new goatkit::Label;
-	label->set_position(0.5, ypos += vsep);
+	/*goatkit::Label *label = new goatkit::Label;
+	label->set_position(xpos, ypos);
 	label->set_size(0.1, 0.1);
 	label->set_text("Stereoscopic rendering");
-	scr.add_widget(label);
+	scr.add_widget(label);*/
 
-	/*
 	goatkit::Button *button = new goatkit::Button;
-	button->set_position(300, ypos += vsep);
-	button->set_size(200, 40);
-	button->set_text("a button!");
-	button->set_callback(goatkit::EV_CLICK, callback);
+	button->set_position(xpos, ypos);
+	button->set_size(0.2, 0.1);
+	button->set_text("Done");
+	button->set_callback(goatkit::EV_CLICK, done_bn_handler);
 	scr.add_widget(button);
 
+	/*
 	goatkit::TextBox *text = new goatkit::TextBox;
 	text->set_position(300, ypos += vsep);
 	text->set_size(200, 30);
@@ -81,12 +90,11 @@ void ui_reshape(int x, int y)
 {
 	width = x;
 	height = y;
+	aspect = (float)width / (float)height;
 }
 
 void ui_draw(void)
 {
-	float aspect = (float)width / (float)height;
-
 	bind_program(prog_ui);
 
 	gl_matrix_mode(GL_PROJECTION);
@@ -128,10 +136,16 @@ void ui_draw(void)
 
 void ui_button(int bn, int press, int x, int y)
 {
-	scr.sysev_mouse_button(bn, press != 0, (float)x / (float)width, (float)y / (float)height);
+	float normx = aspect * (float)x / (float)width;
+	float normy = 1.0 - (float)y / (float)height;
+
+	scr.sysev_mouse_button(bn, press != 0, normx, normy);
 }
 
 void ui_motion(int x, int y)
 {
-	scr.sysev_mouse_motion((float)x / (float)width, (float)y / (float)height);
+	float normx = aspect * (float)x / (float)width;
+	float normy = 1.0 - (float)y / (float)height;
+
+	scr.sysev_mouse_motion(normx, normy);
 }
