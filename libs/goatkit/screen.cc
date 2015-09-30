@@ -21,13 +21,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <vector>
 #include "screen.h"
 #include "widget.h"
+#include "boolanm.h"
 
 #define MAX_BUTTONS		16
 
 namespace goatkit {
 
 struct ScreenImpl {
-	bool visible;
+	BoolAnim visible;
 	std::vector<Widget*> widgets;
 	BBox box;
 
@@ -137,7 +138,7 @@ Widget *Screen::get_widget(const char *name) const
 
 void Screen::show()
 {
-	scr->visible = true;
+	scr->visible.change(true);
 
 	for(size_t i=0; i<scr->widgets.size(); i++) {
 		scr->widgets[i]->show();
@@ -146,7 +147,7 @@ void Screen::show()
 
 void Screen::hide()
 {
-	scr->visible = false;
+	scr->visible.change(false);
 
 	for(size_t i=0; i<scr->widgets.size(); i++) {
 		scr->widgets[i]->hide();
@@ -156,6 +157,24 @@ void Screen::hide()
 bool Screen::is_visible() const
 {
 	return scr->visible;
+}
+
+float Screen::get_visibility() const
+{
+	return scr->visible.get_value();
+}
+
+void Screen::set_visibility_transition(long msec)
+{
+	scr->visible.set_transition_duration(msec);
+	for(size_t i=0; i<scr->widgets.size(); i++) {
+		scr->widgets[i]->set_visibility_transition(msec);
+	}
+}
+
+long Screen::get_visibility_transition() const
+{
+	return scr->visible.get_transition_duration();
 }
 
 bool Screen::grab_mouse(Widget *w)

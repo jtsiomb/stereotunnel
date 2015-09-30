@@ -8,6 +8,10 @@ extern "C" {
 int ui_init(void);
 void ui_shutdown(void);
 
+void ui_show();
+void ui_hide();
+int ui_visible();
+
 void ui_reshape(int x, int y);
 void ui_draw(void);
 

@@ -39,6 +39,8 @@ public:
 	virtual float get_checked() const;
 	virtual bool is_checked() const;
 	virtual void toggle();
+	virtual void set_toggle_transition(long msec);
+	virtual long get_toggle_transition() const;
 
 	virtual void on_click();
 };

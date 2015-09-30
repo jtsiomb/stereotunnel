@@ -34,6 +34,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "drawtext.h"
 #include "timer.h"
 
+#undef STEREO_GUI
+
 static void render(float t);
 static void draw_tunnel(float t);
 static void tunnel_vertex(float u, float v, float du, float dv, int tang_loc, float t);
@@ -100,18 +102,20 @@ int init(void)
 		return -1;
 	}
 
-	if(!(font = dtx_open_font_glyphmap(find_resource("linux-libertine_s24.glyphmap", 0, 0)))) {
+	if(!(font = dtx_open_font_glyphmap(find_resource("droidsans_s24.glyphmap", 0, 0)))) {
 		fprintf(stderr, "failed to load font\n");
 		return -1;
 	}
 	dtx_vertex_attribs(get_attrib_loc(prog_ui, "attr_vertex"), get_attrib_loc(prog_ui, "attr_texcoord"));
-	dtx_use_font(font, 24);
 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 
 	if(ui_init() == -1) {
 		return -1;
+	}
+	if(show_opt) {
+		ui_show();
 	}
 
 	cam_fov(42.5);
@@ -199,19 +203,12 @@ void redraw(void)
 		render(tsec);
 	}
 
-	/* TEST */
-	/*bind_program(prog_ui);
-
-	gl_matrix_mode(GL_PROJECTION);
-	gl_load_identity();
-	gl_ortho(0, view_xsz, 0, view_ysz, -1, 1);
-	gl_matrix_mode(GL_MODELVIEW);
-	gl_load_identity();
-	gl_apply_xform(prog_ui);
-
-	glDisable(GL_DEPTH_TEST);
-	dtx_printf("hello world\n");
-	glEnable(GL_DEPTH_TEST);*/
+#ifndef STEREO_GUI
+	if(ui_visible()) {
+		glViewport(0, 0, view_xsz, view_ysz);
+		ui_draw();
+	}
+#endif
 
 	assert(glGetError() == GL_NO_ERROR);
 }
@@ -233,9 +230,12 @@ static void render(float t)
 		glDepthMask(1);
 	}
 
-	if(show_opt) {
+#ifdef STEREO_GUI
+	if(ui_visible()) {
+		ui_reshape(stereo ? view_xsz / 2.0 : view_xsz, view_ysz);
 		ui_draw();
 	}
+#endif
 }
 
 static void draw_tunnel(float t)
@@ -418,6 +418,11 @@ void mouse_button(int bn, int press, int x, int y)
 {
 	if(show_opt) {
 		ui_button(bn, press, x, y);
+	} else {
+		if(press) {
+			show_opt = 1;
+			ui_show();
+		}
 	}
 }
 

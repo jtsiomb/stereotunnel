@@ -49,6 +49,9 @@ public:
 	void show();
 	void hide();
 	bool is_visible() const;
+	float get_visibility() const;
+	void set_visibility_transition(long msec);
+	long get_visibility_transition() const;
 
 	bool grab_mouse(Widget *w);
 

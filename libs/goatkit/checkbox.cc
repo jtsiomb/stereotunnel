@@ -71,6 +71,16 @@ void CheckBox::toggle()
 	}
 }
 
+void CheckBox::set_toggle_transition(long msec)
+{
+	cbox->checked.set_transition_duration(msec);
+}
+
+long CheckBox::get_toggle_transition() const
+{
+	return cbox->checked.get_transition_duration();
+}
+
 void CheckBox::on_click()
 {
 	toggle();

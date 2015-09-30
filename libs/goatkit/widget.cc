@@ -161,7 +161,7 @@ void Widget::set_active_transition(long msec)
 
 long Widget::get_active_transition() const
 {
-	widget->active.get_transition_duration();
+	return widget->active.get_transition_duration();
 }
 
 void Widget::press()
