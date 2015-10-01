@@ -49,6 +49,9 @@ mklaunch()
 	convert $srclaunch -resize ${xsz}x${ysz}^ \
 		-gravity Center -crop ${xsz}x${ysz}+0+0 +repage \
 		$out
+
+	echo "rotating for landscape-$out (${ysz}x${xsz})"
+	convert $out -rotate 90 landscape-$out
 }
 
 echo "Generating icons ..."
