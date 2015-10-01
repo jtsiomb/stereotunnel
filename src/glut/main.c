@@ -107,3 +107,12 @@ void motion(int x, int y)
 {
 	mouse_motion(x, y);
 }
+
+/* dummy ad banner functions */
+void ad_banner_show(void)
+{
+}
+
+void ad_banner_hide(void)
+{
+}

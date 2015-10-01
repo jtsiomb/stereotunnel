@@ -155,25 +155,9 @@ void redraw(void)
 	if(stereo) {
 		int split_pt = (int)((float)view_xsz * split);
 
-		/* right eye */
+		/* left eye */
 		glViewport(0, 0, split_pt, view_ysz);
 		cam_aspect((float)split_pt / (float)view_ysz);
-
-		gl_matrix_mode(GL_PROJECTION);
-		gl_load_identity();
-		cam_stereo_proj_matrix(CAM_RIGHT);
-		//gl_rotatef(-90, 0, 0, 1);
-
-		gl_matrix_mode(GL_MODELVIEW);
-		gl_load_identity();
-		cam_stereo_view_matrix(CAM_RIGHT);
-		gl_translatef(-pan_x, -pan_y, -1.1 * ring_height * segm);
-
-		render(tsec);
-
-		/* left eye */
-		glViewport(split_pt, 0, view_xsz - split_pt, view_ysz);
-		cam_aspect((float)(view_xsz - split_pt) / (float)view_ysz);
 
 		gl_matrix_mode(GL_PROJECTION);
 		gl_load_identity();
@@ -183,6 +167,22 @@ void redraw(void)
 		gl_matrix_mode(GL_MODELVIEW);
 		gl_load_identity();
 		cam_stereo_view_matrix(CAM_LEFT);
+		gl_translatef(-pan_x, -pan_y, -1.1 * ring_height * segm);
+
+		render(tsec);
+
+		/* right eye */
+		glViewport(split_pt, 0, view_xsz - split_pt, view_ysz);
+		cam_aspect((float)(view_xsz - split_pt) / (float)view_ysz);
+
+		gl_matrix_mode(GL_PROJECTION);
+		gl_load_identity();
+		cam_stereo_proj_matrix(CAM_RIGHT);
+		//gl_rotatef(-90, 0, 0, 1);
+
+		gl_matrix_mode(GL_MODELVIEW);
+		gl_load_identity();
+		cam_stereo_view_matrix(CAM_RIGHT);
 		gl_translatef(-pan_x, -pan_y, -1.1 * ring_height * segm);
 
 		render(tsec);
