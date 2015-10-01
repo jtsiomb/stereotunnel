@@ -63,7 +63,7 @@ float ring_height = 0.5;
 float text_period = 13.0;
 float text_speed = 2.2;
 
-float split = 0.5275;
+float split = 0.4725;
 
 int init(void)
 {

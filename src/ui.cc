@@ -68,19 +68,19 @@ int ui_init(void)
 	ypos -= vsep;
 
 	label_split = new Label;
-	label_split->set_position(170, ypos);
+	label_split->set_position(70, ypos);
 	label_split->set_size(20, vsz);
 	label_split->set_text("Stereo split");
 	if(!stereo) label_split->deactivate();
 	scr.add_widget(label_split);
 
 	slider_split = new Slider;
-	slider_split->set_position(300, ypos);
-	slider_split->set_size(300, vsz);
-	slider_split->set_callback(EV_CHANGE, split_slider_handler);
+	slider_split->set_position(200, ypos);
+	slider_split->set_size(400, vsz);
 	slider_split->set_continuous_change(true);
 	slider_split->set_range(0, 1.0);
 	slider_split->set_value(split);
+	slider_split->set_callback(EV_CHANGE, split_slider_handler);
 	if(!stereo) slider_split->deactivate();
 	scr.add_widget(slider_split);
 	ypos -= vsep;
