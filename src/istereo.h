@@ -27,4 +27,7 @@ void reshape(int x, int y);
 void mouse_button(int bn, int press, int x, int y);
 void mouse_motion(int x, int y);
 
+void playpause(void);
+void seektime(long msec);
+
 #endif	/* ISTEREO_H_ */

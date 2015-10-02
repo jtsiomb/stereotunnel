@@ -51,6 +51,9 @@ struct dtx_font *font;
 int view_xsz, view_ysz;
 float view_aspect;
 
+static int paused;
+static long sys_msec, time_offset, time_msec, last_pause;
+
 int stereo = 0;
 int use_bump = 0;
 int show_opt = 1;
@@ -138,7 +141,9 @@ void cleanup(void)
 void redraw(void)
 {
 	float pan_x, pan_y, z;
-	float tsec = get_time_sec();
+	sys_msec = get_time_msec();
+	time_msec = (paused ? last_pause : sys_msec) + time_offset;
+	double tsec = time_msec / 1000.0;
 
 	z = ring_height * segm;
 	worm(tsec, z, &pan_x, &pan_y);
@@ -431,6 +436,21 @@ void mouse_motion(int x, int y)
 	if(show_opt) {
 		ui_motion(x, y);
 	}
+}
+
+void playpause(void)
+{
+	paused = !paused;
+	if(paused) {
+		last_pause = sys_msec;
+	} else {
+		time_offset -= sys_msec - last_pause;
+	}
+}
+
+void seektime(long msec)
+{
+	time_offset -= msec;
 }
 
 static unsigned int get_shader_program(const char *vfile, const char *pfile)

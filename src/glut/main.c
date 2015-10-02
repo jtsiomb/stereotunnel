@@ -93,6 +93,18 @@ void keyb(unsigned char key, int x, int y)
 		}
 		break;
 
+	case ' ':
+		playpause();
+		break;
+
+	case '.':
+		seektime(250);
+		break;
+
+	case ',':
+		seektime(-250);
+		break;
+
 	default:
 		break;
 	}
