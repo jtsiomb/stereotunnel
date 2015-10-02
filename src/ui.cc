@@ -43,21 +43,21 @@ int ui_init(void)
 
 	CheckBox *cbox;
 
-//#ifdef IPHONE
-//	if(have_retina()) {
+#ifdef IPHONE
+	if(have_retina()) {
 		cbox = new CheckBox;
 		cbox->set_position(300, ypos + vsep);
 		cbox->set_size(300, vsz);
 		cbox->set_text("Retina quality rendering");
-		//if(using_retina_res()) {
+		if(using_retina_res()) {
 			cbox->check();
-		//} else {
-		//	cbox->uncheck();
-		//}
-//		cbox->set_callback(EV_CHANGE, retina_cbox_handler);
+		} else {
+			cbox->uncheck();
+		}
+		cbox->set_callback(EV_CHANGE, retina_cbox_handler);
 		scr.add_widget(cbox);
-//	}
-//#endif
+	}
+#endif
 
 	cbox = new CheckBox;
 	cbox->set_position(300, ypos);
