@@ -1,5 +1,9 @@
-3.5 inch: 960x640
-4.0 inch: 1136x640
-4.7 inch: 1334x750
-5.5 inch: 2208x1242
-    ipad: 2048x1496
+3.5 inch: 960x640	(1.5)
+4.0 inch: 1136x640	(1.775)
+4.7 inch: 1334x750	(1.777)
+5.5 inch: 2208x1242	(1.778)
+    ipad: 2048x1496	(1.369)
+
+shot times:
+simple/gui: 32:234
+bump/simple_stereo: 51:102

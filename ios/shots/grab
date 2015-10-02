@@ -1,0 +1,25 @@
+#!/bin/sh
+
+if [ -z "$1" ]; then
+	name=shot
+else
+	name=$1
+fi
+
+echo "Capturing iOS applestore shots for: $name"
+
+echo 'hit enter to capture 3.5" iphone shot (960x640)'
+read foo
+import ${name}_sz35.jpg
+echo 'hit enter to capture 4.0" iphone shot (1136x640)'
+read foo
+import ${name}_sz40.jpg
+echo 'hit enter to capture 4.7" iphone shot (1134x750)'
+read foo
+import ${name}_sz47.jpg
+echo 'hit enter to capture half-res 5.5" iphone shot (1104x621)'
+read foo
+import ${name}_sz55.jpg && mogrify -resize 2208 ${name}_sz55.jpg
+echo 'hit enter to capture half-res ipad shot (1024x748)'
+read foo
+import ${name}_ipad.jpg && mogrify -resize 2048 ${name}_ipad.jpg

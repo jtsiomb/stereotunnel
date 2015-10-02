@@ -138,6 +138,8 @@ void cleanup(void)
 	dtx_close_font(font);
 }
 
+static int time_print_pending;
+
 void redraw(void)
 {
 	float pan_x, pan_y, z;
@@ -216,6 +218,11 @@ void redraw(void)
 #endif
 
 	assert(glGetError() == GL_NO_ERROR);
+
+	if(time_print_pending) {
+		printf("t: %lds %ldms\n", time_msec / 1000, time_msec % 1000);
+		time_print_pending = 0;
+	}
 }
 
 static void render(float t)
@@ -443,6 +450,7 @@ void playpause(void)
 	paused = !paused;
 	if(paused) {
 		last_pause = sys_msec;
+		time_print_pending = 1;
 	} else {
 		time_offset -= sys_msec - last_pause;
 	}
@@ -450,7 +458,8 @@ void playpause(void)
 
 void seektime(long msec)
 {
-	time_offset -= msec;
+	time_offset += msec;
+	time_print_pending = 1;
 }
 
 static unsigned int get_shader_program(const char *vfile, const char *pfile)

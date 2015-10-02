@@ -98,11 +98,51 @@ void keyb(unsigned char key, int x, int y)
 		break;
 
 	case '.':
-		seektime(250);
+		seektime(50);
+		break;
+	case '>':
+		seektime(10);
+		break;
+	case ']':
+		seektime(1);
 		break;
 
 	case ',':
-		seektime(-250);
+		seektime(-50);
+		break;
+	case '<':
+		seektime(-10);
+		break;
+	case '[':
+		seektime(-1);
+		break;
+
+	case '1':
+		glutReshapeWindow(960, 640);	/* 3.5 inch iphone */
+		break;
+
+	case '2':
+		glutReshapeWindow(1136, 640);	/* 4.0 inch iphone */
+		break;
+
+	case '3':
+		glutReshapeWindow(1334, 750);	/* 4.7 inch iphone */
+		break;
+
+	case '4':
+		glutReshapeWindow(2208, 1242);	/* 5.5 inch iphone */
+		break;
+
+	case '5':
+		glutReshapeWindow(2048, 1496);	/* ipad2? */
+		break;
+
+	case '9':
+		glutReshapeWindow(1104, 621);	/* hald 5.5 inch iphone */
+		break;
+
+	case '0':
+		glutReshapeWindow(1024, 748);	/* half ipad2 */
 		break;
 
 	default:
