@@ -1,8 +1,9 @@
 #include <fcntl.h>
 #include <android/asset_manager.h>
 #include "assman.h"
-#include "native_glue.h"
-#include "amain.h"
+#include "android_native_app_glue.h"
+
+struct android_app *app;	/* defined in android/amain.c */
 
 ass_file *ass_fopen(const char *fname, const char *mode)
 {

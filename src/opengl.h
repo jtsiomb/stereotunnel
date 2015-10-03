@@ -1,6 +1,6 @@
 /*
 Stereoscopic tunnel for iOS.
-Copyright (C) 2011  John Tsiombikas <nuclear@member.fsf.org>
+Copyright (C) 2011-2015 John Tsiombikas <nuclear@member.fsf.org>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -28,6 +28,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define glClearDepth	glClearDepthf
 #define GLDEF
 #include "sanegl.h"
+
+#elif defined(ANDROID)
+#include <GLES2/gl2.h>
+#include <GLES2/gl2ext.h>
+#define GLDEF
+#include "sanegl.h"
+
 #else
 
 #include <GL/glew.h>

@@ -1,11 +1,12 @@
-src += $(wildcard libs/zlib/*.c) \
-	   $(wildcard libs/libpng/*.c) \
-	   $(wildcard libs/libjpeg/*.c) \
-	   $(wildcard libs/imago2/*.c) \
-	   $(wildcard libs/vmath/*.c) \
-	   $(wildcard libs/drawtext/*.c)
+src += $(wildcard $(root)/libs/zlib/*.c) \
+	   $(wildcard $(root)/libs/libpng/*.c) \
+	   $(wildcard $(root)/libs/libjpeg/*.c) \
+	   $(wildcard $(root)/libs/imago2/*.c) \
+	   $(wildcard $(root)/libs/vmath/*.c) \
+	   $(wildcard $(root)/libs/drawtext/*.c)
 
-ccsrc += $(wildcard libs/goatkit/*.cc)
+ccsrc += $(wildcard $(root)/libs/goatkit/*.cc)
 
-incdir += -Ilibs -Ilibs/imago2 -Ilibs/zlib -Ilibs/libpng -Ilibs/libjpeg \
-		  -Ilibs/vmath -Ilibs/drawtext
+incdir += -I$(root)/libs -I$(root)/libs/imago2 -I$(root)/libs/zlib \
+		  -I$(root)/libs/libpng -I$(root)/libs/libjpeg \
+		  -I$(root)/libs/vmath -I$(root)/libs/drawtext

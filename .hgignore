@@ -11,3 +11,11 @@ xcuserdata/
 ^data/
 \.DS_Store
 ^test$
+^android/bin/
+^android/libs/
+^android/res/
+^android/src/
+^android/assets/
+\.xml$
+\.properties$
+proguard-project\.txt$
