@@ -5,6 +5,10 @@
 #include <android/log.h>
 #include "logger.h"
 
+#ifndef APP_NAME
+#define APP_NAME	"stereotunnel"
+#endif
+
 static void *thread_func(void *arg);
 
 static int pfd[2];

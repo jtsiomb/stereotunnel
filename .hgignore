@@ -16,6 +16,7 @@ xcuserdata/
 ^android/res/
 ^android/src/
 ^android/assets/
+^android/gen/
 \.xml$
 \.properties$
 proguard-project\.txt$

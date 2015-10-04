@@ -1,3 +1,4 @@
+root = .
 src = $(wildcard src/*.c) $(wildcard src/glut/*.c)
 ccsrc = $(wildcard src/*.cc)
 

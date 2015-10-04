@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <EGL/egl.h>
-#include <jni.h>
 #include "android_native_app_glue.h"
+#include <android/window.h>
 #include <android/sensor.h>
 #include "logger.h"
 #include "istereo.h"
@@ -32,6 +32,8 @@ void android_main(struct android_app *app_ptr)
 
 	app->onAppCmd = handle_command;
 	app->onInputEvent = handle_input;
+
+	//ANativeActivity_setWindowFlags(app->activity, AWINDOW_FLAG_FULLSCREEN, 0);
 
 	start_logger();
 
@@ -81,6 +83,7 @@ static void handle_command(struct android_app *app, int32_t cmd)
 		break;
 
 	case APP_CMD_INIT_WINDOW:
+		printf("APP_CMD_INIT_WINDOW\n");
 		if(init_gl() == -1) {
 			exit(1);
 		}
@@ -88,21 +91,25 @@ static void handle_command(struct android_app *app, int32_t cmd)
 		if(init() == -1) {
 			exit(1);	/* initialization failed, quit */
 		}
+		reshape(width, height);
 		init_done = 1;
 		break;
 
 	case APP_CMD_TERM_WINDOW:
 		/* cleanup */
+		printf("APP_CMD_TERM_WINDOW\n");
 		init_done = 0;
 		cleanup();
 		destroy_gl();
 		break;
 
 	case APP_CMD_GAINED_FOCUS:
+		printf("APP_CMD_GAINED_FOCUS\n");
 		/* app focused */
 		break;
 
 	case APP_CMD_LOST_FOCUS:
+		printf("APP_CMD_LOST_FOCUS\n");
 		/* app lost focus */
 		break;
 
@@ -112,6 +119,7 @@ static void handle_command(struct android_app *app, int32_t cmd)
 			int nx = ANativeWindow_getWidth(app->window);
 			int ny = ANativeWindow_getHeight(app->window);
 			if(nx != width || ny != height) {
+				printf("reshape(%d, %d)\n", nx, ny);
 				reshape(nx, ny);
 				width = nx;
 				height = ny;
@@ -250,6 +258,7 @@ static int init_gl(void)
 
 	eglQuerySurface(dpy, surf, EGL_WIDTH, &width);
 	eglQuerySurface(dpy, surf, EGL_HEIGHT, &height);
+	printf("initial reshape call: %dx%d\n", width, height);
 	reshape(width, height);
 
 	return 0;

@@ -410,7 +410,7 @@ void reshape(int x, int y)
 	glViewport(0, 0, x, y);
 
 	float aspect = (float)x / (float)y;
-	float maxfov = 40.0;
+	float maxfov = 42.0;
 	float vfov = aspect > 1.0 ? maxfov / aspect : maxfov;
 
 	cam_fov(vfov);
@@ -466,14 +466,14 @@ static unsigned int get_shader_program(const char *vfile, const char *pfile)
 {
 	unsigned int prog, vs, ps;
 
-	if(!(vs = get_vertex_shader(find_resource(vfile, 0, 0)))) {
+	if(!(vs = load_vertex_shader(find_resource(vfile, 0, 0)))) {
 		return 0;
 	}
-	if(!(ps = get_pixel_shader(find_resource(pfile, 0, 0)))) {
+	if(!(ps = load_pixel_shader(find_resource(pfile, 0, 0)))) {
 		return 0;
 	}
 
-	if(!(prog = create_program_link(vs, ps))) {
+	if(!(prog = create_program_link(vs, ps, 0))) {
 		return 0;
 	}
 	return prog;

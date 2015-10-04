@@ -12,6 +12,7 @@ pkgprefix = com.mutantstargoat
 # ------------------------
 
 src += $(wildcard $(root)/src/android/*.c)
+jsrc = $(wildcard $(root)/src/android/*.java)
 
 obj = $(src:.c=.o) $(ccsrc:.cc=.o)
 lib = libs/armeabi/lib$(name).so
@@ -19,7 +20,7 @@ apk-release = bin/$(name).apk
 apk-debug = bin/$(name)-debug.apk
 
 pkg = $(pkgprefix).$(name)
-act = android.app.NativeActivity
+act = $(pkg).MainActivity
 
 CC = arm-linux-androideabi-gcc
 CXX = arm-linux-androideabi-g++
@@ -95,7 +96,7 @@ stop:
 AndroidManifest.xml: manifest.xml.in
 	android create project -p . -t $(android_platform) -k $(pkg) -a NativeActivity -n $(name)
 	cat manifest.xml.in | sed 's/$$APPNAME/$(name)/g' | sed 's/$$APPTITLE/$(title)/g' >$@
-#	cd src && rm -f *.java && ln -s ../../src/android/*.java .
+	cd src && rm -f *.java && ln -s ../../src/android/*.java .
 
 .PHONY: update-project
 update-project: build.xml

@@ -1,27 +1,11 @@
-/*
-Stereoscopic tunnel for iOS.
-Copyright (C) 2011  John Tsiombikas <nuclear@member.fsf.org>
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
+#include <stdarg.h>
 #include <assert.h>
 #include "opengl.h"
+#include "assman.h"
 
 #if defined(unix) || defined(__unix__)
 #include <unistd.h>
@@ -30,6 +14,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "sdr.h"
 
+static const char *sdrtypestr(unsigned int sdrtype);
 
 unsigned int create_vertex_shader(const char *src)
 {
@@ -39,6 +24,33 @@ unsigned int create_vertex_shader(const char *src)
 unsigned int create_pixel_shader(const char *src)
 {
 	return create_shader(src, GL_FRAGMENT_SHADER);
+}
+
+unsigned int create_tessctl_shader(const char *src)
+{
+#ifdef GL_TESS_CONTROL_SHADER
+	return create_shader(src, GL_TESS_CONTROL_SHADER);
+#else
+	return 0;
+#endif
+}
+
+unsigned int create_tesseval_shader(const char *src)
+{
+#ifdef GL_TESS_EVALUATION_SHADER
+	return create_shader(src, GL_TESS_EVALUATION_SHADER);
+#else
+	return 0;
+#endif
+}
+
+unsigned int create_geometry_shader(const char *src)
+{
+#ifdef GL_GEOMETRY_SHADER
+	return create_shader(src, GL_GEOMETRY_SHADER);
+#else
+	return 0;
+#endif
 }
 
 unsigned int create_shader(const char *src, unsigned int sdr_type)
@@ -65,6 +77,7 @@ unsigned int create_shader(const char *src, unsigned int sdr_type)
 		if((info_str = malloc(info_len + 1))) {
 			glGetShaderInfoLog(sdr, info_len, 0, info_str);
 			assert(glGetError() == GL_NO_ERROR);
+			info_str[info_len] = 0;
 		}
 	}
 
@@ -95,63 +108,61 @@ unsigned int load_pixel_shader(const char *fname)
 	return load_shader(fname, GL_FRAGMENT_SHADER);
 }
 
+unsigned int load_tessctl_shader(const char *fname)
+{
+#ifdef GL_TESS_CONTROL_SHADER
+	return load_shader(fname, GL_TESS_CONTROL_SHADER);
+#else
+	return 0;
+#endif
+}
+
+unsigned int load_tesseval_shader(const char *fname)
+{
+#ifdef GL_TESS_EVALUATION_SHADER
+	return load_shader(fname, GL_TESS_EVALUATION_SHADER);
+#else
+	return 0;
+#endif
+}
+
+unsigned int load_geometry_shader(const char *fname)
+{
+#ifdef GL_GEOMETRY_SHADER
+	return load_shader(fname, GL_GEOMETRY_SHADER);
+#else
+	return 0;
+#endif
+}
+
 unsigned int load_shader(const char *fname, unsigned int sdr_type)
 {
-#if defined(unix) || defined(__unix__)
-	struct stat st;
-#endif
 	unsigned int sdr;
 	size_t filesize;
-	FILE *fp;
+	ass_file *fp;
 	char *src;
 
-	if(!(fp = fopen(fname, "r"))) {
+	if(!(fp = ass_fopen(fname, "rb"))) {
 		fprintf(stderr, "failed to open shader %s: %s\n", fname, strerror(errno));
 		return 0;
 	}
 
-#if defined(unix) || defined(__unix__)
-	fstat(fileno(fp), &st);
-	filesize = st.st_size;
-#else
-	fseek(fp, 0, SEEK_END);
-	filesize = ftell(fp);
-	fseek(fp, 0, SEEK_SET);
-#endif	/* unix */
+	filesize = ass_fseek(fp, 0, SEEK_END);
+	/*filesize = ass_ftell(fp);*/
+	ass_fseek(fp, 0, SEEK_SET);
 
 	if(!(src = malloc(filesize + 1))) {
-		fclose(fp);
+		ass_fclose(fp);
 		return 0;
 	}
-	fread(src, 1, filesize, fp);
+	ass_fread(src, 1, filesize, fp);
 	src[filesize] = 0;
-	fclose(fp);
+	ass_fclose(fp);
 
-	fprintf(stderr, "compiling %s shader: %s... ", (sdr_type == GL_VERTEX_SHADER ? "vertex" : "pixel"), fname);
+	fprintf(stderr, "compiling %s shader: %s... ", sdrtypestr(sdr_type), fname);
 	sdr = create_shader(src, sdr_type);
 
 	free(src);
-	return sdr;
-}
-
-
-unsigned int get_vertex_shader(const char *fname)
-{
-	return get_shader(fname, GL_VERTEX_SHADER);
-}
-
-unsigned int get_pixel_shader(const char *fname)
-{
-	return get_shader(fname, GL_FRAGMENT_SHADER);
-}
-
-unsigned int get_shader(const char *fname, unsigned int sdr_type)
-{
-	unsigned int sdr;
-
-	if(!fname || !(sdr = load_shader(fname, sdr_type))) {
-		return 0;
-	}
 	return sdr;
 }
 
@@ -165,18 +176,28 @@ unsigned int create_program(void)
 	return prog;
 }
 
-unsigned int create_program_link(unsigned int vs, unsigned int ps)
+unsigned int create_program_link(unsigned int sdr0, ...)
 {
-	unsigned int prog;
+	unsigned int prog, sdr;
+	va_list ap;
 
 	if(!(prog = create_program())) {
 		return 0;
 	}
 
-	attach_shader(prog, vs);
-	assert(glGetError() == GL_NO_ERROR);
-	attach_shader(prog, ps);
-	assert(glGetError() == GL_NO_ERROR);
+	attach_shader(prog, sdr0);
+	if(glGetError()) {
+		return 0;
+	}
+
+	va_start(ap, sdr0);
+	while((sdr = va_arg(ap, unsigned int))) {
+		attach_shader(prog, sdr);
+		if(glGetError()) {
+			return 0;
+		}
+	}
+	va_end(ap);
 
 	if(link_program(prog) == -1) {
 		free_program(prog);
@@ -187,12 +208,15 @@ unsigned int create_program_link(unsigned int vs, unsigned int ps)
 
 unsigned int create_program_load(const char *vfile, const char *pfile)
 {
-	unsigned int vs, ps;
+	unsigned int vs = 0, ps = 0;
 
-	if(!(vs = get_vertex_shader(vfile)) || !(ps = get_pixel_shader(pfile))) {
+	if(vfile && *vfile && !(vs = load_vertex_shader(vfile))) {
 		return 0;
 	}
-	return create_program_link(vs, ps);
+	if(pfile && *pfile && !(ps = load_pixel_shader(pfile))) {
+		return 0;
+	}
+	return create_program_link(vs, ps, 0);
 }
 
 void free_program(unsigned int sdr)
@@ -202,8 +226,16 @@ void free_program(unsigned int sdr)
 
 void attach_shader(unsigned int prog, unsigned int sdr)
 {
-	glAttachShader(prog, sdr);
-	assert(glGetError() == GL_NO_ERROR);
+	int err;
+
+	if(prog && sdr) {
+		assert(glGetError() == GL_NO_ERROR);
+		glAttachShader(prog, sdr);
+		if((err = glGetError()) != GL_NO_ERROR) {
+			fprintf(stderr, "failed to attach shader %u to program %u (err: 0x%x)\n", sdr, prog, err);
+			abort();
+		}
+	}
 }
 
 int link_program(unsigned int prog)
@@ -222,6 +254,7 @@ int link_program(unsigned int prog)
 		if((info_str = malloc(info_len + 1))) {
 			glGetProgramInfoLog(prog, info_len, 0, info_str);
 			assert(glGetError() == GL_NO_ERROR);
+			info_str[info_len] = 0;
 		}
 	}
 
@@ -259,13 +292,13 @@ int bind_program(unsigned int prog)
 #define BEGIN_UNIFORM_CODE \
 	int loc, curr_prog; \
 	glGetIntegerv(GL_CURRENT_PROGRAM, &curr_prog); \
-	if(curr_prog != prog && bind_program(prog) == -1) { \
+	if((unsigned int)curr_prog != prog && bind_program(prog) == -1) { \
 		return -1; \
 	} \
 	if((loc = glGetUniformLocation(prog, name)) != -1)
 
 #define END_UNIFORM_CODE \
-	if(curr_prog != prog) { \
+	if((unsigned int)curr_prog != prog) { \
 		bind_program(curr_prog); \
 	} \
 	return loc == -1 ? -1 : 0
@@ -282,6 +315,14 @@ int set_uniform_float(unsigned int prog, const char *name, float val)
 {
 	BEGIN_UNIFORM_CODE {
 		glUniform1f(loc, val);
+	}
+	END_UNIFORM_CODE;
+}
+
+int set_uniform_float2(unsigned int prog, const char *name, float x, float y)
+{
+	BEGIN_UNIFORM_CODE {
+		glUniform2f(loc, x, y);
 	}
 	END_UNIFORM_CODE;
 }
@@ -323,13 +364,13 @@ int get_attrib_loc(unsigned int prog, const char *name)
 	int loc, curr_prog;
 
 	glGetIntegerv(GL_CURRENT_PROGRAM, &curr_prog);
-	if(curr_prog != prog && bind_program(prog) == -1) {
+	if((unsigned int)curr_prog != prog && bind_program(prog) == -1) {
 		return -1;
 	}
 
 	loc = glGetAttribLocation(prog, (char*)name);
 
-	if(curr_prog != prog) {
+	if((unsigned int)curr_prog != prog) {
 		bind_program(curr_prog);
 	}
 	return loc;
@@ -338,4 +379,30 @@ int get_attrib_loc(unsigned int prog, const char *name)
 void set_attrib_float3(int attr_loc, float x, float y, float z)
 {
 	glVertexAttrib3f(attr_loc, x, y, z);
+}
+
+static const char *sdrtypestr(unsigned int sdrtype)
+{
+	switch(sdrtype) {
+	case GL_VERTEX_SHADER:
+		return "vertex";
+	case GL_FRAGMENT_SHADER:
+		return "pixel";
+#ifdef GL_TESS_CONTROL_SHADER
+	case GL_TESS_CONTROL_SHADER:
+		return "tessellation control";
+#endif
+#ifdef GL_TESS_EVALUATION_SHADER
+	case GL_TESS_EVALUATION_SHADER:
+		return "tessellation evaluation";
+#endif
+#ifdef GL_GEOMETRY_SHADER
+	case GL_GEOMETRY_SHADER:
+		return "geometry";
+#endif
+
+	default:
+		break;
+	}
+	return "<unknown>";
 }

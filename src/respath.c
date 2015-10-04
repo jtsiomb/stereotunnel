@@ -24,6 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <unistd.h>
 #include "respath.h"
 #include "config.h"
+#include "assman.h"
 
 #ifdef IPHONE
 #include <CoreFoundation/CoreFoundation.h>
@@ -64,8 +65,11 @@ char *find_resource(const char *fname, char *path, size_t sz)
 
 	node = pathlist;
 	while(node) {
+		ass_file *fp;
+
 		snprintf(path, sz, "%s/%s", node->path, fname);
-		if(access(path, F_OK) != -1) {
+		if((fp = ass_fopen(path, "r"))) {
+			ass_fclose(fp);
 			return path;
 		}
 		node = node->next;

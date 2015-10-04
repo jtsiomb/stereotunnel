@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <fcntl.h>
 #include <android/asset_manager.h>
 #include "assman.h"
@@ -37,6 +38,9 @@ ass_file *ass_fopen(const char *fname, const char *mode)
 		prev = *mode++;
 	}
 
+	assert(app);
+	assert(app->activity);
+	assert(app->activity->assetManager);
 	if(!(ass = AAssetManager_open(app->activity->assetManager, fname, flags))) {
 		return 0;
 	}
