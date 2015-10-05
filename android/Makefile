@@ -1,4 +1,5 @@
 bin = stereotunnel
+title = Stereoscopic Tunnel
 root = ..
 src = $(wildcard $(root)/src/*.c)
 ccsrc = $(wildcard $(root)/src/*.cc)
@@ -97,11 +98,12 @@ AndroidManifest.xml: manifest.xml.in
 	android create project -p . -t $(android_platform) -k $(pkg) -a NativeActivity -n $(name)
 	cat manifest.xml.in | sed 's/$$APPNAME/$(name)/g' | sed 's/$$APPTITLE/$(title)/g' >$@
 	cd src && rm -f *.java && ln -s ../../src/android/*.java .
+	$(MAKE) update-project
 
 .PHONY: update-project
 update-project: build.xml
-	android update project -p . -t $(android_platform)
+	android update project -p . -t $(android_platform) --library google-play-services_lib --subprojects
 
 .PHONY: logcat
 logcat:
-	adb logcat $(name):V AndroidRuntime:V DEBUG:V '*:S'
+	adb logcat $(name):V AndroidRuntime:V DEBUG:V Ads:V '*:S'

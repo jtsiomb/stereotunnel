@@ -17,6 +17,7 @@ xcuserdata/
 ^android/src/
 ^android/assets/
 ^android/gen/
+^android/google-play-services_lib/
 \.xml$
 \.properties$
 proguard-project\.txt$
