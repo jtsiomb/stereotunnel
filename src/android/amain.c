@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <EGL/egl.h>
+#include <jni.h>
 #include "android_native_app_glue.h"
 #include <android/window.h>
 #include <android/sensor.h>
@@ -25,6 +26,10 @@ static int redisp_pending = 1;	/* TODO stop busy-looping */
 static int width, height;
 static int init_done;
 
+static JavaVM *jvm;
+static JNIEnv *jni;
+static jclass activity_class;
+
 void android_main(struct android_app *app_ptr)
 {
 	app_dummy();
@@ -36,6 +41,13 @@ void android_main(struct android_app *app_ptr)
 	//ANativeActivity_setWindowFlags(app->activity, AWINDOW_FLAG_FULLSCREEN, 0);
 
 	start_logger();
+
+	jvm = app->activity->vm;
+	if((*jvm)->AttachCurrentThread(jvm, &jni, 0) != 0) {
+		fprintf(stderr, "failed to attach native thread to Java VM\n");
+		exit(1);
+	}
+	activity_class = (*jni)->GetObjectClass(jni, app->activity->clazz);
 
 	for(;;) {
 		int num_events;
@@ -69,10 +81,26 @@ void set_mouse_cursor(int enable)
 /* TODO */
 void ad_banner_show(void)
 {
+	jmethodID method;
+	if(!jvm) return;
+
+	if(!(method = (*jni)->GetMethodID(jni, activity_class, "show_ad", "()V"))) {
+		fprintf(stderr, "failed to retrieve MainActivity.show_ad method\n");
+		return;
+	}
+	(*jni)->CallVoidMethod(jni, activity_class, method);
 }
 
 void ad_banner_hide(void)
 {
+	jmethodID method;
+	if(!jvm) return;
+
+	if(!(method = (*jni)->GetMethodID(jni, activity_class, "hide_ad", "()V"))) {
+		fprintf(stderr, "failed to retrieve MainActivity.hide_ad method\n");
+		return;
+	}
+	(*jni)->CallVoidMethod(jni, activity_class, method);
 }
 
 static void handle_command(struct android_app *app, int32_t cmd)
