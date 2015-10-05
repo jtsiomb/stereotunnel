@@ -17,7 +17,7 @@ public class MainActivity extends NativeActivity
 	public static String ad_id_prod = "ca-app-pub-3466324067850759/4861471428";
 
 	public static String dev_id_gnexus = "B6FBA93004067A8DA892B85127D9454C";
-	public static String dev_id_nexus7 = "";
+	public static String dev_id_nexus7 = "EC3418DBCF3628D89527BCE612BBA299";
 
 	MainActivity act;
 
@@ -201,6 +201,7 @@ public class MainActivity extends NativeActivity
 		AdRequest.Builder reqbuild = new AdRequest.Builder();
 		reqbuild.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
 		reqbuild.addTestDevice(dev_id_gnexus);
+		reqbuild.addTestDevice(dev_id_nexus7);
 		ad_view.loadAd(reqbuild.build());
 
 		waiting_for_ad = true;
