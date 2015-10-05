@@ -101,7 +101,7 @@ AndroidManifest.xml: manifest.xml.in
 	$(MAKE) update-project
 
 .PHONY: update-project
-update-project: build.xml
+update-project: build.xml google-play-services_lib
 	android update project -p . -t $(android_platform) --library google-play-services_lib --subprojects
 
 .PHONY: logcat
