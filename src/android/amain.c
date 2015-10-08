@@ -80,7 +80,6 @@ void set_mouse_cursor(int enable)
 {
 }
 
-/* TODO */
 void ad_banner_show(void)
 {
 	jmethodID method;
@@ -114,6 +113,8 @@ static void handle_command(struct android_app *app, int32_t cmd)
 
 	case APP_CMD_INIT_WINDOW:
 		printf("APP_CMD_INIT_WINDOW\n");
+		ad_banner_show();
+
 		if(init_gl() == -1) {
 			exit(1);
 		}

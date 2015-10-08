@@ -49,6 +49,7 @@ public class MainActivity extends NativeActivity
 		super.onDestroy();
 	}
 
+	/*
 	@Override
 	public void onAttachedToWindow()
 	{
@@ -56,6 +57,7 @@ public class MainActivity extends NativeActivity
 
 		create_ad_popup();
 	}
+	*/
 
 	@Override
 	public void onWindowFocusChanged(boolean focus)
@@ -83,6 +85,7 @@ public class MainActivity extends NativeActivity
 		}
 	}
 
+	/*
 	public void onConfigurationChanged(Configuration config)
 	{
 		super.onConfigurationChanged(config);
@@ -90,6 +93,7 @@ public class MainActivity extends NativeActivity
 		destroy_ad_popup();
 		create_ad_popup();
 	}
+	*/
 
 	public void set_fullscreen()
 	{
@@ -138,7 +142,6 @@ public class MainActivity extends NativeActivity
 				act.setContentView(ad_main_layout, params);
 
 
-
 				ad_view = new AdView(act);
 				ad_view.setAdSize(AdSize.BANNER);
 				ad_view.setAdUnitId(ad_id_test);
@@ -167,15 +170,9 @@ public class MainActivity extends NativeActivity
 						Log.e(tag, "ad failed to load, error code: " + error_code);
 						ad_ready = false;
 						waiting_for_ad = false;
-
 						request_ad();
 					}
 				});
-
-
-				if(!waiting_for_ad) {
-					request_ad();
-				}
 
 				Log.i(tag, "Done creating ad popup");
 			}
@@ -213,14 +210,14 @@ public class MainActivity extends NativeActivity
 	{
 		Log.i(tag, "show_ad called");
 
+		if(ad_win == null) {
+			create_ad_popup();
+		}
+
 		if(ad_ready) {
-			if(ad_win == null) {
-				create_ad_popup();
-			}
-			ad_view.setVisibility(View.VISIBLE);
+			//ad_view.setVisibility(View.VISIBLE);
 			ad_win.showAtLocation(ad_main_layout, Gravity.TOP, 0, 0);
 			ad_win.update();
-			Log.i(tag, "showing ad window: " + ad_win);
 		} else {
 			if(!waiting_for_ad) {
 				request_ad();
@@ -232,9 +229,7 @@ public class MainActivity extends NativeActivity
 	{
 		Log.i(tag, "hide_ad called");
 		//ad_view.setVisibility(View.GONE);
-		Log.i(tag, "hiding ad window: " + ad_win);
 		ad_win.dismiss();
-		ad_win.update();
 		//ad_win.update();
 		//destroy_ad_popup();
 		ad_ready = false;
