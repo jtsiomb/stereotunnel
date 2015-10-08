@@ -49,7 +49,6 @@ public class MainActivity extends NativeActivity
 		super.onDestroy();
 	}
 
-	/*
 	@Override
 	public void onAttachedToWindow()
 	{
@@ -57,7 +56,6 @@ public class MainActivity extends NativeActivity
 
 		create_ad_popup();
 	}
-	*/
 
 	@Override
 	public void onWindowFocusChanged(boolean focus)
@@ -70,6 +68,7 @@ public class MainActivity extends NativeActivity
 
 	protected void onResume()
 	{
+		Log.i(tag, "[JAVA] onResume()");
 		super.onResume();
 		if(ad_view != null) {
 			ad_view.resume();
@@ -79,6 +78,7 @@ public class MainActivity extends NativeActivity
 
 	protected void onPause()
 	{
+		Log.i(tag, "[JAVA] onPause()");
 		super.onPause();
 		if(ad_view != null) {
 			ad_view.pause();
@@ -115,7 +115,7 @@ public class MainActivity extends NativeActivity
 	// ads ...
 	public void create_ad_popup()
 	{
-		Log.i(tag, "create_ad_popup called");
+		Log.i(tag, "[JAVA] create_ad_popup called");
 		if(ad_view != null) return;
 
 		act = this;
@@ -124,7 +124,7 @@ public class MainActivity extends NativeActivity
 			@Override
 			public void run()
 			{
-				Log.i(tag, "Creating Ad popup");
+				Log.i(tag, "[JAVA] Creating Ad popup");
 
 				ad_win = new PopupWindow(act);
 				// set minimum size
@@ -152,13 +152,12 @@ public class MainActivity extends NativeActivity
 				ad_layout.addView(ad_view, params);
 				ad_win.setContentView(ad_layout);
 
-
 				ad_view.setAdListener(new AdListener() {
 					@Override
 					public void onAdLoaded()
 					{
+						Log.i(tag, "[JAVA] ad loaded");
 						super.onAdLoaded();
-						Log.i(tag, "ad loaded");
 						ad_ready = true;
 						waiting_for_ad = false;
 						show_ad();
@@ -166,22 +165,22 @@ public class MainActivity extends NativeActivity
 					@Override
 					public void onAdFailedToLoad(int error_code)
 					{
+						Log.e(tag, "[JAVA] ad failed to load, error code: " + error_code);
 						super.onAdFailedToLoad(error_code);
-						Log.e(tag, "ad failed to load, error code: " + error_code);
 						ad_ready = false;
 						waiting_for_ad = false;
 						request_ad();
 					}
 				});
 
-				Log.i(tag, "Done creating ad popup");
+				Log.i(tag, "[JAVA] Done creating ad popup");
 			}
 		});
 	}
 
 	public void destroy_ad_popup()
 	{
-		Log.i(tag, "destroy_ad_popup called");
+		Log.i(tag, "[JAVA] destroy_ad_popup called");
 
 		if(ad_view != null) {
 			ad_view.destroy();
@@ -195,7 +194,12 @@ public class MainActivity extends NativeActivity
 
 	public void request_ad()
 	{
-		Log.i(tag, "requesting ad");
+		Log.i(tag, "[JAVA] requesting ad");
+
+		if(ad_view == null) {
+			Log.e(tag, "[JAVA] request_ad called without an ad_view");
+			return;
+		}
 
 		AdRequest.Builder reqbuild = new AdRequest.Builder();
 		reqbuild.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
@@ -208,26 +212,24 @@ public class MainActivity extends NativeActivity
 
 	private void show_ad()
 	{
-		Log.i(tag, "show_ad called");
-
-		if(ad_win == null) {
-			create_ad_popup();
-		}
-
 		if(ad_ready) {
-			//ad_view.setVisibility(View.VISIBLE);
+			Log.i(tag, "[JAVA] show_ad called with ad ready");
+			ad_view.setVisibility(View.VISIBLE);
 			ad_win.showAtLocation(ad_main_layout, Gravity.TOP, 0, 0);
 			ad_win.update();
 		} else {
 			if(!waiting_for_ad) {
+				Log.i(tag, "[JAVA] show_ad called with ad neither ready nor pending");
 				request_ad();
+			} else {
+				Log.i(tag, "[JAVA] show_ad called with ad pending: nop");
 			}
 		}
 	}
 
 	private void hide_ad()
 	{
-		Log.i(tag, "hide_ad called");
+		Log.i(tag, "[JAVA] hide_ad called");
 		//ad_view.setVisibility(View.GONE);
 		ad_win.dismiss();
 		//ad_win.update();

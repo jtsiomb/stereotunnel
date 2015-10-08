@@ -85,6 +85,8 @@ void ad_banner_show(void)
 	jmethodID method;
 	if(!jvm) return;
 
+	printf("ad_banner_show called\n");
+
 	if(!(method = (*jni)->GetMethodID(jni, activity_class, "show_ad", "()V"))) {
 		fprintf(stderr, "failed to retrieve MainActivity.show_ad method\n");
 		return;
@@ -96,6 +98,8 @@ void ad_banner_hide(void)
 {
 	jmethodID method;
 	if(!jvm) return;
+
+	printf("ad_banner_hide called\n");
 
 	if(!(method = (*jni)->GetMethodID(jni, activity_class, "hide_ad", "()V"))) {
 		fprintf(stderr, "failed to retrieve MainActivity.hide_ad method\n");
@@ -113,7 +117,7 @@ static void handle_command(struct android_app *app, int32_t cmd)
 
 	case APP_CMD_INIT_WINDOW:
 		printf("APP_CMD_INIT_WINDOW\n");
-		ad_banner_show();
+		//ad_banner_show();
 
 		if(init_gl() == -1) {
 			exit(1);
