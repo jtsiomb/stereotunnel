@@ -29,6 +29,7 @@ static int init_done;
 static JavaVM *jvm;
 static JNIEnv *jni;
 static jclass activity_class;
+static jobject activity;
 
 void android_main(struct android_app *app_ptr)
 {
@@ -47,6 +48,7 @@ void android_main(struct android_app *app_ptr)
 		fprintf(stderr, "failed to attach native thread to Java VM\n");
 		exit(1);
 	}
+	activity = app->activity->clazz;
 	activity_class = (*jni)->GetObjectClass(jni, app->activity->clazz);
 
 	for(;;) {
@@ -88,7 +90,7 @@ void ad_banner_show(void)
 		fprintf(stderr, "failed to retrieve MainActivity.show_ad method\n");
 		return;
 	}
-	(*jni)->CallVoidMethod(jni, activity_class, method);
+	(*jni)->CallVoidMethod(jni, activity, method);
 }
 
 void ad_banner_hide(void)
@@ -100,7 +102,7 @@ void ad_banner_hide(void)
 		fprintf(stderr, "failed to retrieve MainActivity.hide_ad method\n");
 		return;
 	}
-	(*jni)->CallVoidMethod(jni, activity_class, method);
+	(*jni)->CallVoidMethod(jni, activity, method);
 }
 
 static void handle_command(struct android_app *app, int32_t cmd)

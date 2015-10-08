@@ -173,7 +173,9 @@ public class MainActivity extends NativeActivity
 				});
 
 
-				request_ad();
+				if(!waiting_for_ad) {
+					request_ad();
+				}
 
 				Log.i(tag, "Done creating ad popup");
 			}
@@ -210,11 +212,15 @@ public class MainActivity extends NativeActivity
 	private void show_ad()
 	{
 		Log.i(tag, "show_ad called");
-		//ad_view.setVisibility(View.VISIBLE);
 
 		if(ad_ready) {
+			if(ad_win == null) {
+				create_ad_popup();
+			}
+			ad_view.setVisibility(View.VISIBLE);
 			ad_win.showAtLocation(ad_main_layout, Gravity.TOP, 0, 0);
 			ad_win.update();
+			Log.i(tag, "showing ad window: " + ad_win);
 		} else {
 			if(!waiting_for_ad) {
 				request_ad();
@@ -226,7 +232,11 @@ public class MainActivity extends NativeActivity
 	{
 		Log.i(tag, "hide_ad called");
 		//ad_view.setVisibility(View.GONE);
+		Log.i(tag, "hiding ad window: " + ad_win);
 		ad_win.dismiss();
+		ad_win.update();
+		//ad_win.update();
+		//destroy_ad_popup();
 		ad_ready = false;
 		waiting_for_ad = false;
 	}
