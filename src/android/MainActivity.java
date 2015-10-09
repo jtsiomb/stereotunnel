@@ -21,7 +21,7 @@ public class MainActivity extends NativeActivity
 
 	MainActivity act;
 
-	AdView ad_view;
+	AdView ad_view = null;
 	PopupWindow ad_win;
 	LinearLayout ad_layout, ad_main_layout;
 	boolean ad_ready = false;
@@ -172,6 +172,10 @@ public class MainActivity extends NativeActivity
 						request_ad();
 					}
 				});
+
+				if(!waiting_for_ad) {
+					request_ad();
+				}
 
 				Log.i(tag, "[JAVA] Done creating ad popup");
 			}
