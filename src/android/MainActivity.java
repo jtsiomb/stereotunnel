@@ -25,7 +25,9 @@ public class MainActivity extends NativeActivity
 	PopupWindow ad_win;
 	LinearLayout ad_layout, ad_main_layout;
 	boolean ad_ready = false;
-	boolean waiting_for_ad = false;
+	boolean ad_visible = false;
+	boolean ad_show_pending = false;
+	AdRequest ad_request;
 
 	@Override
 	protected void onCreate(Bundle saved_inst)
@@ -120,10 +122,11 @@ public class MainActivity extends NativeActivity
 
 		act = this;
 
+		/*
 		this.runOnUiThread(new Runnable() {
 			@Override
 			public void run()
-			{
+			{*/
 				Log.i(tag, "[JAVA] Creating Ad popup");
 
 				ad_win = new PopupWindow(act);
@@ -159,7 +162,6 @@ public class MainActivity extends NativeActivity
 						Log.i(tag, "[JAVA] ad loaded");
 						super.onAdLoaded();
 						ad_ready = true;
-						waiting_for_ad = false;
 						show_ad();
 					}
 					@Override
@@ -168,18 +170,28 @@ public class MainActivity extends NativeActivity
 						Log.e(tag, "[JAVA] ad failed to load, error code: " + error_code);
 						super.onAdFailedToLoad(error_code);
 						ad_ready = false;
-						waiting_for_ad = false;
 						request_ad();
 					}
 				});
 
-				if(!waiting_for_ad) {
+				/*if(!ad_view.isLoading()) {
 					request_ad();
-				}
+				}*/
+				AdRequest.Builder reqbuild = new AdRequest.Builder();
+				reqbuild.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
+				reqbuild.addTestDevice(dev_id_gnexus);
+				reqbuild.addTestDevice(dev_id_nexus7);
+				ad_request = reqbuild.build();
+
+				ad_win.showAtLocation(ad_main_layout, Gravity.TOP, 0, 0);
+				ad_win.update();
+
+				show_ad();
 
 				Log.i(tag, "[JAVA] Done creating ad popup");
+				/*
 			}
-		});
+		});*/
 	}
 
 	public void destroy_ad_popup()
@@ -210,36 +222,54 @@ public class MainActivity extends NativeActivity
 		reqbuild.addTestDevice(dev_id_gnexus);
 		reqbuild.addTestDevice(dev_id_nexus7);
 		ad_view.loadAd(reqbuild.build());
-
-		waiting_for_ad = true;
 	}
 
 	private void show_ad()
 	{
+		Log.i(tag, "[JAVA] show_ad called");
+		if(ad_view == null || ad_request == null) {
+			ad_show_pending = true;
+			return;
+		}
+		/*if(!ad_visible) {
+			ad_view.resume();
+		}*/
+		if(!ad_ready && !ad_view.isLoading()) {
+			ad_view.loadAd(ad_request);
+			return;
+		}
+		ad_view.setVisibility(View.VISIBLE);
+		ad_view.resume();
+		ad_win.update();
+		ad_show_pending = false;
+		/*
 		if(ad_ready) {
 			Log.i(tag, "[JAVA] show_ad called with ad ready");
-			ad_view.setVisibility(View.VISIBLE);
 			ad_win.showAtLocation(ad_main_layout, Gravity.TOP, 0, 0);
 			ad_win.update();
 		} else {
-			if(!waiting_for_ad) {
+			if(!ad_view.isLoading()) {
 				Log.i(tag, "[JAVA] show_ad called with ad neither ready nor pending");
 				request_ad();
 			} else {
 				Log.i(tag, "[JAVA] show_ad called with ad pending: nop");
 			}
 		}
+		*/
 	}
 
 	private void hide_ad()
 	{
 		Log.i(tag, "[JAVA] hide_ad called");
-		//ad_view.setVisibility(View.GONE);
-		ad_win.dismiss();
-		//ad_win.update();
+		ad_view.destroy();
+		ad_view.setVisibility(View.GONE);
+		ad_view.pause();
+		//ad_win.dismiss();
+		ad_win.update();
 		//destroy_ad_popup();
 		ad_ready = false;
-		waiting_for_ad = false;
+		ad_visible = false;
+		ad_show_pending = false;
 	}
 
 
