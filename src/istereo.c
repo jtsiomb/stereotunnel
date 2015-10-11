@@ -57,6 +57,7 @@ static long sys_msec, time_offset, time_msec, last_pause;
 int stereo = 0;
 int use_bump = 0;
 int show_opt = 1;
+float draw_quality = 1.0f;
 
 /* construction parameters */
 int sides = 24;

@@ -19,12 +19,15 @@ static void bump_cbox_handler(Widget *w, const Event &ev, void *cls);
 static void split_slider_handler(Widget *w, const Event &ev, void *cls);
 #ifdef IPHONE
 static void retina_cbox_handler(Widget *w, const Event &ev, void *cls);
+#else
+static void qual_slider_handler(Widget *w, const Event &ev, void *cls);
 #endif
 
 extern int stereo;
 extern int show_opt;
 extern int use_bump;
 extern float split;
+extern float draw_quality;
 
 static Screen scr;
 static float aspect;
@@ -57,6 +60,24 @@ int ui_init(void)
 		cbox->set_callback(EV_CHANGE, retina_cbox_handler);
 		scr.add_widget(cbox);
 	}
+#else
+	/*
+	label_split = new Label;
+	label_split->set_position(100, ypos + vsep);
+	label_split->set_size(20, vsz);
+	label_split->set_text("Rendering quality");
+	scr.add_widget(label_split);
+
+	Slider *slider = new Slider;
+	slider->set_position(300, ypos + vsep);
+	slider->set_size(300, vsz);
+	slider->set_range(0.5, 1);
+	slider->set_step(0.25);
+	slider->set_value(1.0);
+	slider->set_continuous_change(true);
+	slider->set_callback(EV_CHANGE, qual_slider_handler);
+	scr.add_widget(slider);
+	*/
 #endif
 
 	cbox = new CheckBox;
@@ -232,6 +253,11 @@ static void split_slider_handler(Widget *w, const Event &ev, void *cls)
 static void retina_cbox_handler(Widget *w, const Event &ev, void *cls)
 {
 	use_retina_res(((CheckBox*)w)->is_checked() ? 1 : 0);
+}
+#else
+static void qual_slider_handler(Widget *w, const Event &ev, void *cls)
+{
+	draw_quality = ((Slider*)w)->get_value();
 }
 #endif
 
