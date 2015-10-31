@@ -1,0 +1,21 @@
+StereoTunnel v2.1
+-----------------
+
+Stereoscopic Tunnel Effect, for the Hasbro My3D stereoscope, google cardboard,
+or any other similar stereoscopic mobile phone attachement.
+
+You can enjoy the simple mono version of the effect in two variants, the simple
+texture mapped tunnel and the normal mapped (bumpy) with glowing messages
+version.
+
+But if you have the Hasbro My3D, google cardboard, or any other stereoscopic
+viewer for mobile phones, flip the stereo switch, to experience the tunnel's
+depth in glorious stereoscopic 3D.
+
+This program is free software.
+Copyright (C) John Tsiombikas <nuclear@member.fsf.org>
+License: GNU General Public License (GPL) v3 (see COPYING for details)
+
+         web page: http://nuclear.mutantstargoat.com/sw/istereo
+iOS appstore page: https://itunes.apple.com/us/app/stereoscopic-tunnel-effect/id658276824
+ source code repo: https://github.com/jtsiomb/stereotunnel
