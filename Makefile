@@ -9,7 +9,7 @@ bin = test
 incdir = -Isrc
 def = -DNO_FREETYPE
 
-CFLAGS = -pedantic -Wall -g $(def) $(incdir)
+CFLAGS = -pedantic -Wall -g $(def) $(incdir) -MMD
 CXXFLAGS = $(CFLAGS)
 LDFLAGS = $(libgl) -lm -ldl
 
@@ -27,12 +27,6 @@ $(bin): $(obj)
 	@$(CXX) -o $@ $(obj) $(LDFLAGS)
 
 -include $(dep)
-
-%.d: %.c
-	@$(CPP) $(CFLAGS) -MM -MT $(@:.d=.o) $< >$@
-
-%.d: %.cc
-	@$(CPP) $(CXXFLAGS) -MM -MT $(@:.d=.o) $< >$@
 
 .PHONY: clean
 clean:
